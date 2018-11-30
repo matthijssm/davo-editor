@@ -1,0 +1,22 @@
+@import '../../resources/sass/variables.scss';
+
+.fileGroupHeader {
+    width: 100%;
+    padding: 10px $window-padding;
+    box-sizing: border-box;
+    border-bottom: 1px solid lighten($explorer-bg, 5);
+    color: $explorer-color;
+    font-size: 13px;
+
+    &.isActive {
+        background: $explorer-folder-bg-active;
+    }
+
+    .icon {
+        margin-right: 10px;
+    }
+
+    .caret {
+        float: right;
+    }
+}

@@ -1,0 +1,14 @@
+@import '../../resources/sass/variables.scss';
+
+.topBar {
+    width: 100%;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+
+    background: $dark-gray;
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+}

@@ -1,0 +1,35 @@
+// Colors
+$dark-gray: #222222;
+$slate-gray: #55545e;
+$gray: #80787b;
+$tan: #ceb69f;
+$orchid: #ac64c4;
+$white: #ffffff;
+
+// Tab bar
+$tab-bar-bg: $dark-gray;
+$tab-bar-tab-bg: $dark-gray;
+$tab-bar-tab-bg-hover: lighten($dark-gray, 2);
+$tab-bar-tab-bg-active: lighten($dark-gray, 4);
+$tab-bar-color-active: $white;
+$tab-bar-color: darken($white, 50);
+
+$header-bar-bg: $tab-bar-tab-bg-active;
+$header-bar-tab-bg: $tab-bar-tab-bg-active;
+$header-bar-tab-bg-hover: darken($tab-bar-tab-bg-active, 10);
+$header-bar-tab-bg-active: orchid;
+$header-bar-color-active: $white;
+$header-bar-color: $white;
+
+$explorer-bg: $slate-gray;
+$explorer-color: darken($white, 5);
+$explorer-folder-bg-active: $orchid;
+$explorer-item-bg: $slate-gray;
+$explorer-item-bg-hover: lighten($slate-gray, 5);
+
+// Fonts
+$font-family: 'Roboto', sans-serif;
+$font-size: 11px;
+
+// Pixel management
+$window-padding: 15px;

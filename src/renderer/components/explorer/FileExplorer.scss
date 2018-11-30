@@ -1,0 +1,15 @@
+@import '../../resources/sass/variables.scss';
+
+.fileExplorer {
+    height: calc(100% - 40px);
+    width: 300px;
+    background: $explorer-bg;
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+
+    .fileServices {
+        flex: 1;
+        overflow-y: scroll;
+    }
+}
