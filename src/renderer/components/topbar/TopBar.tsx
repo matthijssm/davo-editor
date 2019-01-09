@@ -62,7 +62,11 @@ export class TopBar extends React.Component<TopBarProps> {
                     key={editorViewModel.id}
                     onClick={this.onClick(editorViewModel)}
                     onClose={this.onClose(editorViewModel)}
-                    ref={ref => (this.tabElements[index] = ref)}
+                    ref={ref =>
+                        ref !== null
+                            ? (this.tabElements[index] = ref)
+                            : undefined
+                    }
                 />
             );
         });
@@ -115,6 +119,10 @@ export class TopBar extends React.Component<TopBarProps> {
             this.props.editorState.closeEditor(editor);
         };
     };
+
+    componentWillUpdate() {
+        this.tabElements = [];
+    }
 
     componentDidUpdate() {
         this.scrollActiveTabIntoView();
