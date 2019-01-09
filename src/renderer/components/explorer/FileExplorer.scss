@@ -1,7 +1,7 @@
 @import '../../resources/sass/variables.scss';
 
 .fileExplorer {
-    height: calc(100% - 40px);
+    height: 100%;
     width: 300px;
     background: $explorer-bg;
     user-select: none;

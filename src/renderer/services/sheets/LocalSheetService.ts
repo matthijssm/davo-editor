@@ -1,13 +1,11 @@
-import { ISheetService } from './ISheetService';
-import { IconDefinition, faFolder } from '@fortawesome/pro-light-svg-icons';
-import { Sheet } from '../../model/Sheet';
+import { faFolder } from '@fortawesome/pro-light-svg-icons';
 import { remote } from 'electron';
 import fs from 'fs';
-import { string } from 'prop-types';
-import { resolve } from 'dns';
-import { observable, action, runInAction } from 'mobx';
+import { observable, action } from 'mobx';
 import * as uuid from 'uuid';
-import { IDocument } from '../../model/IDocument';
+
+import { ISheetService } from './ISheetService';
+import { Sheet } from '../../model/Sheet';
 
 const dataPath = remote.app.getPath('userData') + '/davo-files';
 
@@ -17,7 +15,7 @@ export class LocalSheetService implements ISheetService {
     public icon = faFolder;
 
     @observable
-    public sheets: IDocument[] = [];
+    public sheets: Sheet[] = [];
 
     constructor() {
         this.loadSheets();
@@ -32,7 +30,7 @@ export class LocalSheetService implements ISheetService {
         const files = await this.getFilesFromDirectory();
 
         const sheets = files.map(file => {
-            fs.readFile(dataPath + '/' + file, (error, data) => {
+            fs.readFile(dataPath + '/' + file, error => {
                 if (error) {
                     console.info('Davo file could not be read');
                     return;

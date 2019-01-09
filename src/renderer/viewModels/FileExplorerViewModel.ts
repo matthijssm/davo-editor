@@ -1,6 +1,6 @@
 import { ISheetService } from '../services/sheets/ISheetService';
 import { computed, observable, action } from 'mobx';
-
+import { Sheet } from '../model/Sheet';
 export class FileExplorerViewModel {
     @observable
     private openService: ISheetService | null = null;
@@ -16,7 +16,7 @@ export class FileExplorerViewModel {
     }
 
     @action
-    toggleActive(service: ISheetService) {
+    toggleActiveService(service: ISheetService) {
         if (this.isActive(service)) {
             this.openService = null;
         } else {
@@ -24,9 +24,18 @@ export class FileExplorerViewModel {
         }
     }
 
-    createFile() {
+    createFile(): Promise<Sheet> | null {
         if (this.openService) {
-            this.openService.createSheet();
+            return this.openService.createSheet();
         }
+        return null;
+    }
+
+    importFile() {
+        if (!this.openService) {
+        }
+        // Create a new sheet
+        // Open the new sheet
+        // Open the file import dialog
     }
 }

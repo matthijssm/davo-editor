@@ -1,16 +1,18 @@
 @import '../../resources/sass/variables.scss';
 
 .topBarTab {
-    background: $tab-bar-tab-bg;
+    background-color: $tab-bar-tab-bg;
     color: $tab-bar-color;
     display: flex;
-    height: 100%;
+    height: 40px;
 
     align-items: center;
     line-height: 0;
     letter-spacing: 1px;
     padding: 0 10px;
     text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     .spinner {
         margin: 0 0 0 5px;
@@ -32,6 +34,5 @@
     &.isActive {
         background: $tab-bar-tab-bg-active;
         color: $tab-bar-color-active;
-        font-weight: 600;
     }
 }

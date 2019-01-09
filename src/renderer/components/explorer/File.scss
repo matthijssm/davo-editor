@@ -21,4 +21,8 @@
         color: darken($white, 40);
         margin-left: 5px;
     }
+
+    &.isSelected {
+        background: lighten($explorer-item-bg-selected, 10);
+    }
 }

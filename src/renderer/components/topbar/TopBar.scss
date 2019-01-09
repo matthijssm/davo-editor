@@ -11,4 +11,19 @@
     background: $dark-gray;
     -webkit-app-region: drag;
     -webkit-user-select: none;
+
+    .horizontalScrollable {
+        width: 100%;
+        height: 100%;
+        overflow-x: auto;
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        position: relative;
+        &::-webkit-scrollbar {
+            width: 0px;
+            background: transparent; /* make scrollbar transparent */
+            height: 0px;
+        }
+    }
 }

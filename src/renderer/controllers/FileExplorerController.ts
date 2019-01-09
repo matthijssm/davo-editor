@@ -1,10 +1,9 @@
 import { ISheetService } from '../services/sheets/ISheetService';
 import { LocalSheetService } from '../services/sheets/LocalSheetService';
-import { faFolder } from '@fortawesome/pro-light-svg-icons';
 import { FileExplorerViewModel } from '../viewModels/FileExplorerViewModel';
 
 export class FileExplorerController {
-    public register: ISheetService[] = [];
+    private register: ISheetService[] = [];
     public viewModel: FileExplorerViewModel;
 
     constructor() {

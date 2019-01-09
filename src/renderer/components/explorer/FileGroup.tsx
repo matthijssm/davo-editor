@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 import classNames from 'classNames';
 import {
     IconDefinition,
@@ -10,16 +10,18 @@ import {
     faCaretCircleDown,
     faCaretDown,
 } from '@fortawesome/pro-regular-svg-icons';
-import { Sheet } from '../../model/Sheet';
 import { observer } from 'mobx-react';
 import { File } from './File';
+import { Sheet } from '../../model/Sheet';
 
 type FileGroupProps = {
     title: string;
     active: boolean;
     icon: IconDefinition;
     files: Sheet[];
+    selectedSheet: Sheet;
     onClick?: () => void;
+    onSheetSelected: (s: Sheet) => void;
 };
 
 @observer
@@ -57,7 +59,22 @@ export class FileGroup extends React.Component<FileGroupProps> {
         const files = this.props.files;
 
         return files.map(file => {
-            return <File sheet={file} key={file.ID} />;
+            return (
+                <File
+                    sheet={file}
+                    key={file.ID}
+                    onSelect={this.onSelect}
+                    isSelected={
+                        this.props.selectedSheet
+                            ? this.props.selectedSheet.ID === file.ID
+                            : false
+                    }
+                />
+            );
         });
     }
+
+    private onSelect = (sheet: Sheet) => {
+        this.props.onSheetSelected(sheet);
+    };
 }
