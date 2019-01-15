@@ -2,7 +2,8 @@
 
 .fileExplorer {
     height: 100%;
-    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
     background: $explorer-bg;
     user-select: none;
     display: flex;

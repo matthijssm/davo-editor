@@ -4,4 +4,8 @@ export interface IDocument {
     title: string;
 
     subtitle: string;
+
+    sections: [];
+
+    toJson(): string;
 }

@@ -1,0 +1,21 @@
+@import '../../../resources/sass/variables';
+
+.propertiesPane {
+    box-sizing: border-box;
+    width: 300px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .headerBar {
+        border-left: 1px solid darken($properties-pane-border, 20);
+    }
+
+    .content {
+        box-sizing: border-box;
+        border-left: 1px solid lighten($properties-pane-border, 40);
+        background: $white;
+        flex-grow: 1;
+        padding: $gutter-size;
+    }
+}

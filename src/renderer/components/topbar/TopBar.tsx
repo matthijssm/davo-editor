@@ -58,8 +58,9 @@ export class TopBar extends React.Component<TopBarProps> {
                     active={isActive}
                     label={editorViewModel.label}
                     loading={editorViewModel.isLoading}
-                    closable={true}
+                    closable={!editorViewModel.isUnsaved}
                     key={editorViewModel.id}
+                    unsaved={editorViewModel.isUnsaved}
                     onClick={this.onClick(editorViewModel)}
                     onClose={this.onClose(editorViewModel)}
                     ref={ref =>

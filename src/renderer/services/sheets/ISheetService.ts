@@ -8,4 +8,6 @@ export interface ISheetService {
     sheets: Sheet[];
 
     createSheet(): Promise<Sheet>;
+
+    saveSheet(sheet: Sheet): Promise<Sheet>;
 }

@@ -3,7 +3,7 @@ import { computed, observable, action } from 'mobx';
 import { Sheet } from '../model/Sheet';
 export class FileExplorerViewModel {
     @observable
-    private openService: ISheetService | null = null;
+    public openService: ISheetService | null = null;
 
     constructor(private register: ISheetService[]) {}
 

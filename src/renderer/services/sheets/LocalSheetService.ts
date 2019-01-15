@@ -1,11 +1,12 @@
 import { faFolder } from '@fortawesome/pro-light-svg-icons';
 import { remote } from 'electron';
 import fs from 'fs';
-import { observable, action } from 'mobx';
+import { observable, action, computed } from 'mobx';
 import * as uuid from 'uuid';
 
 import { ISheetService } from './ISheetService';
 import { Sheet } from '../../model/Sheet';
+import { orderBy } from 'lodash';
 
 const dataPath = remote.app.getPath('userData') + '/davo-files';
 
@@ -15,29 +16,31 @@ export class LocalSheetService implements ISheetService {
     public icon = faFolder;
 
     @observable
-    public sheets: Sheet[] = [];
+    public _sheets: Sheet[] = [];
 
     constructor() {
         this.loadSheets();
     }
 
+    @computed
+    get sheets(): Sheet[] {
+        return orderBy(this._sheets, ['title', 'subtitle'], 'asc');
+    }
+
     @action
     private async loadSheets() {
-        this.sheets = await this.getSheets();
+        this._sheets = await this.getSheets();
     }
 
     async getSheets(): Promise<Sheet[]> {
         const files = await this.getFilesFromDirectory();
 
         const sheets = files.map(file => {
-            fs.readFile(dataPath + '/' + file, error => {
-                if (error) {
-                    console.info('Davo file could not be read');
-                    return;
-                }
+            const data = fs.readFileSync(dataPath + '/' + file, {
+                encoding: 'utf-8',
             });
 
-            return new Sheet('All I Want For Christmas', 'Maria Carey');
+            return Sheet.fromJson(data);
         });
 
         return Promise.resolve(sheets);
@@ -60,16 +63,18 @@ export class LocalSheetService implements ISheetService {
 
     async createSheet(): Promise<Sheet> {
         const creatingSheet = new Promise<Sheet>(resolve => {
-            const filePath = dataPath + '/' + uuid.v4() + '.davo';
+            const newSheet = new Sheet(null, 'Untitled Sheet', '');
 
-            fs.writeFile(filePath, '{}', error => {
+            const filePath = dataPath + '/' + newSheet.ID + '.davo';
+
+            fs.writeFile(filePath, newSheet.toJson(), error => {
                 if (error) {
-                    console.info('Writing Davo file failed!');
+                    console.error('Writing Davo file failed!');
                     return;
                 }
             });
 
-            resolve(new Sheet('Untitled', ''));
+            resolve(newSheet);
         });
 
         return creatingSheet.then(sheet => {
@@ -81,6 +86,21 @@ export class LocalSheetService implements ISheetService {
 
     @action.bound
     private addSheet(sheet: Sheet) {
-        this.sheets.push(sheet);
+        this._sheets.push(sheet);
+    }
+
+    async saveSheet(sheet: Sheet): Promise<Sheet> {
+        return new Promise<Sheet>(resolve => {
+            const filePath = dataPath + '/' + sheet.ID + '.davo';
+
+            fs.writeFile(filePath, sheet.toJson(), error => {
+                if (error) {
+                    console.error('Writing Davo file failed!');
+                    return;
+                }
+            });
+
+            resolve(sheet);
+        });
     }
 }

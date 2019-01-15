@@ -28,9 +28,12 @@ $explorer-item-bg: $slate-gray;
 $explorer-item-bg-hover: lighten($slate-gray, 5);
 $explorer-item-bg-selected: $orchid;
 
+$properties-pane-border: $gray;
+
 // Fonts
 $font-family: 'Roboto', sans-serif;
 $font-size: 11px;
 
 // Pixel management
 $window-padding: 15px;
+$gutter-size: 15px;

@@ -26,7 +26,10 @@ export class EditorState {
             this.activeEditor = exisitingTab;
         } else {
             if (document instanceof Sheet) {
-                const viewModel = new SheetEditorViewModel(document);
+                const viewModel = new SheetEditorViewModel(
+                    document,
+                    this.fileExplorerController.viewModel.openService
+                );
                 this.openEditors.push(viewModel);
                 this.activeEditor = viewModel;
             }

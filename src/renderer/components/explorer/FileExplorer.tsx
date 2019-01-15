@@ -27,17 +27,16 @@ export class FileExplorer extends React.Component<FileExplorerProps> {
             <div className="fileExplorer">
                 <HeaderBar>
                     <Group align="left">
-                        <HeaderBarTab selectionDisabled={true}>
-                            EXPLORER
-                        </HeaderBarTab>
+                        <HeaderBarTab
+                            label="EXPLORER"
+                            selectionDisabled={true}
+                        />
                     </Group>
                     <Group align="right">
-                        <HeaderBarTab onClick={this.createFile}>
-                            <FontAwesomeIcon icon={faFilePlus} size="lg" />
-                        </HeaderBarTab>
-                        <HeaderBarTab onClick={this.importFile}>
-                            <FontAwesomeIcon icon={faFileImport} size="lg" />
-                        </HeaderBarTab>
+                        <HeaderBarTab
+                            onClick={this.createFile}
+                            icon={faFilePlus}
+                        />
                     </Group>
                 </HeaderBar>
                 <div className="fileServices">{this.renderFileServices()}</div>
@@ -78,9 +77,12 @@ export class FileExplorer extends React.Component<FileExplorerProps> {
     private createFile = () => {
         const { viewModel, editorState } = this.props;
 
-        viewModel.createFile().then(sheet => {
-            editorState.openEditor(sheet);
-        });
+        const newFilePromise = viewModel.createFile();
+        if (newFilePromise) {
+            newFilePromise.then(sheet => {
+                editorState.openEditor(sheet);
+            });
+        }
     };
 
     private importFile = () => {

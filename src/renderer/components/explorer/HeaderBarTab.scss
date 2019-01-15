@@ -12,7 +12,6 @@
         background: $header-bar-tab-bg-hover;
     }
 
-    &.is-active,
     &:active {
         background: $header-bar-tab-bg-active;
     }
@@ -26,5 +25,38 @@
         &:active {
             background: $header-bar-tab-bg;
         }
+    }
+
+    &.isEditable {
+        padding: 0;
+        flex-grow: 1;
+        &:hover {
+            background: $header-bar-tab-bg;
+        }
+
+        &.is-active,
+        &:active {
+            background: $header-bar-tab-bg;
+        }
+
+        input {
+            background: $header-bar-tab-bg;
+            border: none;
+            color: $header-bar-color;
+            font-size: $font-size + 2;
+
+            outline: none;
+            width: 100%;
+            text-align: center;
+        }
+    }
+
+    &.isFullWidth {
+        flex-grow: 1;
+        justify-content: center;
+    }
+
+    &.isActive {
+        background: $header-bar-tab-bg-hover;
     }
 }

@@ -24,5 +24,9 @@
 
     &.isSelected {
         background: lighten($explorer-item-bg-selected, 10);
+
+        .subtitle {
+            color: darken($white, 10);
+        }
     }
 }

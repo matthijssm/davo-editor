@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classNames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/pro-regular-svg-icons';
+import { faTimes, faCircle } from '@fortawesome/pro-regular-svg-icons';
 import {
     faSpinnerThird,
     IconDefinition,
@@ -14,6 +14,7 @@ type TopBarTabProps = {
     active?: boolean;
     closable?: boolean;
     loading?: boolean;
+    unsaved?: boolean;
     onClick?: () => void;
     onClose?: () => void;
 };
@@ -22,7 +23,7 @@ type TopBarTabProps = {
 export class TopBarTab extends React.Component<TopBarTabProps> {
     render() {
         const styles = require('./TopBarTab.scss');
-        const { active, closable, loading, label, icon } = this.props;
+        const { active, closable, loading, label, icon, unsaved } = this.props;
 
         const style = classNames({
             topBarTab: true,
@@ -31,8 +32,10 @@ export class TopBarTab extends React.Component<TopBarTabProps> {
 
         return (
             <div className={style} onClick={this.props.onClick}>
-                {label ? label : null}
-                {icon ? <FontAwesomeIcon icon={icon} size="lg" /> : null}
+                <div className="label">
+                    {icon ? <FontAwesomeIcon icon={icon} size="lg" /> : null}
+                    {label ? <p className="labelText">{label}</p> : null}
+                </div>
 
                 {closable && (
                     <div className="closeIcon" onClick={this.onClose}>
@@ -43,6 +46,12 @@ export class TopBarTab extends React.Component<TopBarTabProps> {
                 {loading && (
                     <div className="spinner">
                         <FontAwesomeIcon icon={faSpinnerThird} spin />
+                    </div>
+                )}
+
+                {unsaved && (
+                    <div className="closeIcon" onClick={this.onClose}>
+                        <FontAwesomeIcon icon={faCircle} />
                     </div>
                 )}
             </div>
