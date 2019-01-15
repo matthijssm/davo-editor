@@ -11,13 +11,19 @@ import {
 import { ISheetService } from '../services/sheets/ISheetService';
 import { isEmpty } from 'lodash';
 
+export type PropertiesPaneTabs = 'Sheet' | 'Meta';
+
 export class SheetEditorViewModel implements ITabbedEditor {
     isLoading: boolean = false;
+
     @observable
     isUnsaved: boolean = false;
 
     @observable
     document: Sheet;
+
+    @observable
+    openPropertiesPane: PropertiesPaneTabs = 'Meta';
 
     private documentObserverDisposer: IReactionDisposer;
 

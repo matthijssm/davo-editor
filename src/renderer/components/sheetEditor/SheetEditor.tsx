@@ -24,9 +24,10 @@ export class SheetEditor extends React.Component<SheetEditorProps> {
                 <div className="editorPaneContainer">
                     <HeaderBar>
                         <Group align="left">
-                            <HeaderBarTab selectionDisabled={true}>
-                                SHEET EDITOR
-                            </HeaderBarTab>
+                            <HeaderBarTab
+                                selectionDisabled={true}
+                                label="Sheet Editor"
+                            />
                         </Group>
                         <Group align="center">
                             <EditableHeaderBarTab
@@ -52,7 +53,7 @@ export class SheetEditor extends React.Component<SheetEditorProps> {
                     </div>
                 </div>
                 <div className="propertiesPaneContainer">
-                    <PropertiesPane />
+                    <PropertiesPane viewModel={viewModel} />
                 </div>
             </>
         );
