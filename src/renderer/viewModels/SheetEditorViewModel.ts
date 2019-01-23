@@ -10,6 +10,7 @@ import {
 } from 'mobx';
 import { ISheetService } from '../services/sheets/ISheetService';
 import { isEmpty } from 'lodash';
+import { Key } from '../model/Key';
 
 export type PropertiesPaneTabs = 'Sheet' | 'Meta';
 
@@ -61,6 +62,17 @@ export class SheetEditorViewModel implements ITabbedEditor {
     @action
     updateSubtitle(value: string) {
         this.document.subtitle = value;
+    }
+
+    @action
+    updateKey(key: Key) {
+        this.document.key = key;
+    }
+
+    @action
+    updateCapo(capo: number) {
+        this.document.capo = capo;
+        console.log(capo);
     }
 
     @action

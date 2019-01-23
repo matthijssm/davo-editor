@@ -36,12 +36,12 @@ export class EditableHeaderBarTab extends React.Component<
         const { value, onBlur, placeholder } = this.props;
 
         return (
-            <div className={classNames('headerBarTab', 'isEditable')}>
+            <div className={classNames(styles.headerBarTab, styles.isEditable)}>
                 <input
                     value={value}
                     onChange={this.onChange}
                     onBlur={onBlur}
-                    className="headerBarTabInput"
+                    className={styles.headerBarTabInput}
                     placeholder={placeholder}
                     ref={this.inputElement}
                     size={this.inputSize}

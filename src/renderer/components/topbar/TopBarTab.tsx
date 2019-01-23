@@ -19,38 +19,38 @@ type TopBarTabProps = {
     onClose?: () => void;
 };
 
+const styles = require('./TopBarTab.scss');
+
 @observer
 export class TopBarTab extends React.Component<TopBarTabProps> {
     render() {
-        const styles = require('./TopBarTab.scss');
         const { active, closable, loading, label, icon, unsaved } = this.props;
 
-        const style = classNames({
-            topBarTab: true,
-            isActive: active,
+        const style = classNames(styles.topBarTab, {
+            [styles.isActive]: active,
         });
 
         return (
             <div className={style} onClick={this.props.onClick}>
-                <div className="label">
+                <div className={styles.label}>
                     {icon ? <FontAwesomeIcon icon={icon} size="lg" /> : null}
-                    {label ? <p className="labelText">{label}</p> : null}
+                    {label ? <p className={styles.labelText}>{label}</p> : null}
                 </div>
 
                 {closable && (
-                    <div className="closeIcon" onClick={this.onClose}>
+                    <div className={styles.closeIcon} onClick={this.onClose}>
                         <FontAwesomeIcon icon={faTimes} />
                     </div>
                 )}
 
                 {loading && (
-                    <div className="spinner">
+                    <div className={styles.spinner}>
                         <FontAwesomeIcon icon={faSpinnerThird} spin />
                     </div>
                 )}
 
                 {unsaved && (
-                    <div className="closeIcon" onClick={this.onClose}>
+                    <div className={styles.closeIcon} onClick={this.onClose}>
                         <FontAwesomeIcon icon={faCircle} />
                     </div>
                 )}

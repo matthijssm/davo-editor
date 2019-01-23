@@ -10,5 +10,8 @@
         "target": "es2017",
         "experimentalDecorators": true
     },
-    "exclude": ["node_modules"]
+    "exclude": ["node_modules"],
+    "paths": {
+        "essentials": ["src/essentials"]
+    }
 }

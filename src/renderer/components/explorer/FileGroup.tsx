@@ -13,42 +13,43 @@ import {
 import { observer } from 'mobx-react';
 import { File } from './File';
 import { Sheet } from '../../model/Sheet';
+import { IDocument } from '../../model/IDocument';
 
 type FileGroupProps = {
     title: string;
     active: boolean;
     icon: IconDefinition;
-    files: Sheet[];
-    selectedSheet: Sheet;
+    files: IDocument[];
+    selectedSheet: IDocument;
     onClick?: () => void;
-    onSheetSelected: (s: Sheet) => void;
+    onSheetSelected: (s: IDocument) => void;
 };
+
+const styles = require('./FileGroup.scss');
 
 @observer
 export class FileGroup extends React.Component<FileGroupProps> {
-    private style = require('./FileGroup.scss');
-
     render() {
         const { title, active, icon } = this.props;
 
-        const style = classNames('fileGroupHeader', {
-            isActive: active,
+        const style = classNames(styles.fileGroupHeader, {
+            [styles.isActive]: active,
         });
 
         return (
-            <div className="fileGroup">
+            <div className={styles}>
                 <div className={style} onClick={this.props.onClick}>
-                    <span className="icon">
+                    <span className={styles.icon}>
                         <FontAwesomeIcon icon={icon} />
                     </span>
-                    <span className="title">{title}</span>
-                    <span className="caret">
+                    <span className={styles.title}>{title}</span>
+                    <span className={styles.caret}>
                         <FontAwesomeIcon
                             icon={active ? faCaretDown : faCaretLeft}
                         />
                     </span>
                 </div>
-                <div className="fileGroupFiles">
+                <div className={styles.fileGroupFiles}>
                     {active && this.renderFiles()}
                 </div>
             </div>

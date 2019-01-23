@@ -9,16 +9,16 @@ type WindowButtonsProps = {
     window: BrowserWindow;
 };
 
+const styles = require('./WindowButtons.scss');
+
 @observer
 export class WindowButtons extends React.Component<WindowButtonsProps> {
     @observable
     private isFullscreen = false;
 
     render() {
-        const style = require('./WindowButtons.scss');
-
         return (
-            <div className="windowButtonsContainer">
+            <div className={styles.windowButtonsContainer}>
                 <WindowButton
                     type={WindowButtonType.CLOSE}
                     onclick={this.closeWindow}

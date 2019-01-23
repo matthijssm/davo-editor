@@ -2,7 +2,11 @@ import React from 'react';
 import { HeaderBar, Group } from './HeaderBar';
 import { HeaderBarTab } from './HeaderBarTab';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFilePlus, faFileImport } from '@fortawesome/pro-light-svg-icons';
+import {
+    faFilePlus,
+    faFileImport,
+    faUnicorn,
+} from '@fortawesome/pro-light-svg-icons';
 import { FileGroup } from './FileGroup';
 import { FileExplorerViewModel } from '../../viewModels/FileExplorerViewModel';
 import { observer } from 'mobx-react';
@@ -24,7 +28,7 @@ export class FileExplorer extends React.Component<FileExplorerProps> {
 
     render() {
         return (
-            <div className="fileExplorer">
+            <div className={styles.fileExplorer}>
                 <HeaderBar>
                     <Group align="left">
                         <HeaderBarTab
@@ -37,9 +41,15 @@ export class FileExplorer extends React.Component<FileExplorerProps> {
                             onClick={this.createFile}
                             icon={faFilePlus}
                         />
+                        <HeaderBarTab
+                            onClick={this.resaveFiles}
+                            icon={faUnicorn}
+                        />
                     </Group>
                 </HeaderBar>
-                <div className="fileServices">{this.renderFileServices()}</div>
+                <div className={styles.fileServices}>
+                    {this.renderFileServices()}
+                </div>
             </div>
         );
     }
@@ -83,6 +93,10 @@ export class FileExplorer extends React.Component<FileExplorerProps> {
                 editorState.openEditor(sheet);
             });
         }
+    };
+
+    private resaveFiles = () => {
+        this.props.viewModel.resaveFiles();
     };
 
     private importFile = () => {

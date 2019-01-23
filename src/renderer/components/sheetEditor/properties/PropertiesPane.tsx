@@ -7,6 +7,7 @@ import {
 } from '../../../viewModels/SheetEditorViewModel';
 import { action } from 'mobx';
 import { observer } from 'mobx-react';
+import { MetaPane } from './MetaPane';
 
 type PropertiesPaneProps = {
     viewModel: SheetEditorViewModel;
@@ -20,7 +21,7 @@ export class PropertiesPane extends React.Component<PropertiesPaneProps> {
         const { viewModel } = this.props;
 
         return (
-            <div className="propertiesPane">
+            <div className={styles.propertiesPane}>
                 <HeaderBar>
                     <HeaderBarTab
                         fullWidth={true}
@@ -35,7 +36,11 @@ export class PropertiesPane extends React.Component<PropertiesPaneProps> {
                         onClick={() => this.setOpenPropertiesPane('Sheet')}
                     />
                 </HeaderBar>
-                <div className="content" />
+                <div className={styles.content}>
+                    {viewModel.openPropertiesPane == 'Meta' ? (
+                        <MetaPane viewModel={viewModel} />
+                    ) : null}
+                </div>
             </div>
         );
     }

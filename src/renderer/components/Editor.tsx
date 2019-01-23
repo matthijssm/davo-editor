@@ -13,7 +13,7 @@ type EditorProps = {
 @observer
 export class Editor extends React.Component<EditorProps> {
     render() {
-        return <div className="editor">{this.renderActiveEditor()}</div>;
+        return <div className={styles.editor}>{this.renderActiveEditor()}</div>;
     }
 
     private renderActiveEditor() {

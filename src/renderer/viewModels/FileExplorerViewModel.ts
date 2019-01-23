@@ -31,6 +31,12 @@ export class FileExplorerViewModel {
         return null;
     }
 
+    resaveFiles(): boolean {
+        if (this.openService) {
+            return this.openService.resaveFiles();
+        }
+    }
+
     importFile() {
         if (!this.openService) {
         }

@@ -21,7 +21,7 @@ export class SheetEditor extends React.Component<SheetEditorProps> {
         const { viewModel } = this.props;
         return (
             <>
-                <div className="editorPaneContainer">
+                <div className={styles.editorPaneContainer}>
                     <HeaderBar>
                         <Group align="left">
                             <HeaderBarTab
@@ -48,11 +48,11 @@ export class SheetEditor extends React.Component<SheetEditorProps> {
                             <HeaderBarTab icon={faFileImport} />
                         </Group>
                     </HeaderBar>
-                    <div className="sheetEditor">
+                    <div className={styles.sheetEditor}>
                         The current active sheet is: {viewModel.label}
                     </div>
                 </div>
-                <div className="propertiesPaneContainer">
+                <div className={styles.propertiesPaneContainer}>
                     <PropertiesPane viewModel={viewModel} />
                 </div>
             </>

@@ -12,8 +12,9 @@ type HeaderBarTabProps = {
     onClick?: () => void;
 };
 
+const styles = require('./HeaderBarTab.scss');
+
 export class HeaderBarTab extends React.Component<HeaderBarTabProps> {
-    private styles = require('./HeaderBarTab.scss');
     render() {
         const {
             label,
@@ -23,10 +24,10 @@ export class HeaderBarTab extends React.Component<HeaderBarTabProps> {
             isActive,
         } = this.props;
 
-        const style = classNames('headerBarTab', {
-            isSelectionDisabled: selectionDisabled,
-            isFullWidth: fullWidth,
-            isActive: isActive,
+        const style = classNames(styles.headerBarTab, {
+            [styles.isSelectionDisabled]: selectionDisabled,
+            [styles.isFullWidth]: fullWidth,
+            [styles.isActive]: isActive,
         });
 
         return (

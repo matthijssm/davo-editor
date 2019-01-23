@@ -73,7 +73,15 @@ let rendererConfig = {
                 test: /\.(scss|css)$/,
                 use: [
                     'style-loader',
-                    'css-loader?sourceMap',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            sourceMap: true,
+                            localIdentName: '[local]__[hash:base64:5]',
+                            minimize: true,
+                        },
+                    },
                     'sass-loader?sourceMap',
                 ],
             },

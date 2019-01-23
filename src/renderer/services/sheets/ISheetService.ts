@@ -10,4 +10,6 @@ export interface ISheetService {
     createSheet(): Promise<Sheet>;
 
     saveSheet(sheet: Sheet): Promise<Sheet>;
+
+    resaveFiles(): boolean;
 }

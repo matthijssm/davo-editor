@@ -12,16 +12,18 @@ export enum WindowButtonType {
     FULLSCREEN,
 }
 
+const styles = require('./WindowButton.scss');
+
 export class WindowButton extends React.Component<WindowButtonProps> {
     render() {
-        const styles = require('./WindowButton.scss');
-
         const style = classNames({
-            windowButton: true,
-            closeType: this.props.type === WindowButtonType.CLOSE,
-            minimizeType: this.props.type === WindowButtonType.MINIMIZE,
-            fullscreenType: this.props.type === WindowButtonType.FULLSCREEN,
-            disabled: this.props.disabled,
+            [styles.windowButton]: true,
+            [styles.closeType]: this.props.type === WindowButtonType.CLOSE,
+            [styles.minimizeType]:
+                this.props.type === WindowButtonType.MINIMIZE,
+            [styles.fullscreenType]:
+                this.props.type === WindowButtonType.FULLSCREEN,
+            [styles.disabled]: this.props.disabled,
         });
 
         return (

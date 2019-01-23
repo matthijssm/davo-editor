@@ -4,6 +4,7 @@ import { EditorState } from './components/EditorState';
 import { TopBar } from './components/topbar/TopBar';
 import { FileExplorer } from './components/explorer/FileExplorer';
 import { Editor } from './components/Editor';
+import classNames from 'classnames';
 
 const editorState = new EditorState();
 
@@ -15,9 +16,9 @@ export class App extends React.Component<AppProps> {
     render() {
         return (
             <Provider editorState={editorState}>
-                <div className="container">
+                <div className={classNames(styles.container)}>
                     <TopBar editorState={editorState} />
-                    <div className="content">
+                    <div className={styles.content}>
                         <FileExplorer
                             viewModel={
                                 editorState.fileExplorerController.viewModel

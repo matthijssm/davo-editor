@@ -17,5 +17,7 @@
         background: $white;
         flex-grow: 1;
         padding: $gutter-size;
+        display: flex;
+        flex-direction: column;
     }
 }

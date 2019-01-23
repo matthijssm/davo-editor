@@ -1,7 +1,8 @@
 // Colors
 $dark-gray: #222222;
-$slate-gray: #55545e;
+$slate-gray: #555555;
 $gray: #80787b;
+$light-gray: #d7d7d7;
 $tan: #ceb69f;
 $orchid: #ac64c4;
 $white: #ffffff;
@@ -30,10 +31,21 @@ $explorer-item-bg-selected: $orchid;
 
 $properties-pane-border: $gray;
 
+$color-primary: $orchid;
+
 // Fonts
 $font-family: 'Roboto', sans-serif;
 $font-size: 11px;
 
+$font-size-labels: 13px;
+
 // Pixel management
 $window-padding: 15px;
 $gutter-size: 15px;
+$border-radius: 3px;
+
+$control-padding: 8px;
+
+// Color management
+$body-color: $slate-gray;
+$border-color: $light-gray;

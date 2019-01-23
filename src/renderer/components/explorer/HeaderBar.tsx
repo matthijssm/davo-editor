@@ -3,11 +3,11 @@ import classNames from 'classNames';
 
 type HeaderBarProps = {};
 
-export class HeaderBar extends React.Component<HeaderBarProps> {
-    private styles = require('./HeaderBar.scss');
+const styles = require('./HeaderBar.scss');
 
+export class HeaderBar extends React.Component<HeaderBarProps> {
     render() {
-        return <div className="headerBar">{this.props.children}</div>;
+        return <div className={styles.headerBar}>{this.props.children}</div>;
     }
 }
 
@@ -19,10 +19,10 @@ export class Group extends React.Component<GroupProps> {
     render() {
         const { align, children } = this.props;
 
-        const style = classNames('headerBarGroup', {
-            isLeft: align === 'left',
-            isCenter: align === 'center',
-            isRight: align === 'right',
+        const style = classNames(styles.headerBarGroup, {
+            [styles.isLeft]: align === 'left',
+            [styles.isCenter]: align === 'center',
+            [styles.sRight]: align === 'right',
         });
 
         return <div className={style}>{children}</div>;

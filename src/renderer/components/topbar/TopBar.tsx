@@ -13,6 +13,8 @@ type TopBarProps = {
     editorState: EditorState;
 };
 
+const styles = require('./TopBar.scss');
+
 @observer
 export class TopBar extends React.Component<TopBarProps> {
     private horizontalScrollElement = React.createRef<HTMLDivElement>();
@@ -25,17 +27,15 @@ export class TopBar extends React.Component<TopBarProps> {
     }
 
     render() {
-        const styles = require('./TopBar.scss');
-
         return (
-            <div className={classNames('topBar')}>
+            <div className={classNames(styles.topBar)}>
                 <WindowButtons window={this.props.editorState.browserWindow} />
 
                 <TopBarTab active={true} icon={faThList} />
                 <TopBarTab active={false} icon={faCogs} />
 
                 <div
-                    className="horizontalScrollable"
+                    className={styles.horizontalScrollable}
                     ref={this.horizontalScrollElement}>
                     {this.renderOpenTabs()}
                 </div>

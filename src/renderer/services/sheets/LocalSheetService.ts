@@ -16,7 +16,7 @@ export class LocalSheetService implements ISheetService {
     public icon = faFolder;
 
     @observable
-    public _sheets: Sheet[] = [];
+    private _sheets: Sheet[] = [];
 
     constructor() {
         this.loadSheets();
@@ -102,5 +102,13 @@ export class LocalSheetService implements ISheetService {
 
             resolve(sheet);
         });
+    }
+
+    resaveFiles(): boolean {
+        this._sheets.forEach(async sheet => {
+            await this.saveSheet(sheet);
+        });
+
+        return true;
     }
 }
