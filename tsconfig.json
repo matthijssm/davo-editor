@@ -8,10 +8,14 @@
         "noImplicitThis": true,
         "sourceMap": true,
         "target": "es2017",
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "baseUrl": "src/renderer",
+        "paths": {
+            "essentials": ["essentials"],
+            "essentials/*": ["essentials/*"],
+            "base": ["base"],
+            "base/*": ["base/*"]
+        }
     },
-    "exclude": ["node_modules"],
-    "paths": {
-        "essentials": ["src/essentials"]
-    }
+    "exclude": ["node_modules"]
 }

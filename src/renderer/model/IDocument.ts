@@ -1,4 +1,5 @@
-import { Key } from './Key';
+import { Key } from "./Key";
+import { Section } from "./Section";
 
 export interface IDocument {
     ID: string;
@@ -8,8 +9,9 @@ export interface IDocument {
 
     key: Key;
     capo: number;
+    tempo: number;
 
-    sections: [];
+    sections: Section[];
 
     toJson(): string;
 }

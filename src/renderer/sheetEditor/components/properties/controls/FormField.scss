@@ -1,0 +1,15 @@
+@import '../../../../essentials/styles/variables';
+
+.formField {
+    width: 100%;
+    margin-bottom: $gutter-size;
+
+    .label {
+        color: $body-color;
+        font-weight: bold;
+    }
+
+    .control {
+        margin-top: $gutter-size/ 2;
+    }
+}

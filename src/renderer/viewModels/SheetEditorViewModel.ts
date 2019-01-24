@@ -1,18 +1,13 @@
-import { ITabbedEditor } from '../controls/ITabbedEditor';
-import { Sheet } from '../model/Sheet';
-import { IDocument } from '../model/IDocument';
-import {
-    observable,
-    IReactionDisposer,
-    reaction,
-    computed,
-    action,
-} from 'mobx';
-import { ISheetService } from '../services/sheets/ISheetService';
-import { isEmpty } from 'lodash';
-import { Key } from '../model/Key';
+import { ITabbedEditor } from "../controls/ITabbedEditor";
+import { Sheet } from "../model/Sheet";
+import { IDocument } from "../model/IDocument";
+import { observable, IReactionDisposer, reaction, computed, action } from "mobx";
+import { ISheetService } from "../services/sheets/ISheetService";
+import { isEmpty } from "lodash";
+import { Key } from "../model/Key";
+import { Section } from "../model/Section";
 
-export type PropertiesPaneTabs = 'Sheet' | 'Meta';
+export type PropertiesPaneTabs = "Sheet" | "Meta";
 
 export class SheetEditorViewModel implements ITabbedEditor {
     isLoading: boolean = false;
@@ -24,7 +19,7 @@ export class SheetEditorViewModel implements ITabbedEditor {
     document: Sheet;
 
     @observable
-    openPropertiesPane: PropertiesPaneTabs = 'Meta';
+    openPropertiesPane: PropertiesPaneTabs = "Meta";
 
     private documentObserverDisposer: IReactionDisposer;
 
@@ -33,13 +28,9 @@ export class SheetEditorViewModel implements ITabbedEditor {
 
         this.documentObserverDisposer = reaction(
             () => {
-                return {
-                    title: this.document.title,
-                    subtitle: this.document.subtitle,
-                    sections: this.document.sections,
-                };
+                return this.document.toJson();
             },
-            document => {
+            changedDocument => {
                 this.isUnsaved = true;
             }
         );
@@ -72,13 +63,29 @@ export class SheetEditorViewModel implements ITabbedEditor {
     @action
     updateCapo(capo: number) {
         this.document.capo = capo;
-        console.log(capo);
+    }
+
+    @action
+    updateTempo(tempo: number): any {
+        this.document.tempo = tempo;
+    }
+
+    @action
+    createSection(): any {
+        this.document.sections.push(new Section());
+    }
+
+    @action
+    deleteSection(id: string): any {
+        const index = this.document.sections.findIndex(section => section.id === id);
+
+        this.document.sections.splice(index, 1);
     }
 
     @action
     saveSheet() {
         if (isEmpty(this.document.title)) {
-            this.document.title = 'Untitled';
+            this.document.title = "Untitled";
         }
 
         this.service.saveSheet(this.document);

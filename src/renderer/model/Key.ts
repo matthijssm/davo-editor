@@ -1,4 +1,4 @@
-import { extendObservable, observable } from 'mobx';
+import { extendObservable, observable } from "mobx";
 
 export enum Mode {
     Major,
@@ -29,11 +29,11 @@ export type IKeyJson = {
 
 export class Key {
     @observable
-    public note: Note;
+    note: Note;
     @observable
-    public modifier: Modifier;
+    modifier: Modifier;
     @observable
-    public mode: Mode;
+    mode: Mode;
 
     constructor(
         note: Note = Note.A,
@@ -61,18 +61,18 @@ export class Key {
 
     private getModifierString(): string {
         if (this.modifier === Modifier.Flat) {
-            return 'b';
+            return "b";
         }
 
         if (this.modifier === Modifier.Sharp) {
-            return '#';
+            return "#";
         }
 
-        return '';
+        return "";
     }
 
     private getModeString(): string {
-        if (this.mode === Mode.Minor) return 'm';
-        return '';
+        if (this.mode === Mode.Minor) return "m";
+        return "";
     }
 }

@@ -1,0 +1,32 @@
+@import "../../../essentials/styles/variables";
+
+.file {
+    padding: 5px $window-padding 5px $window-padding * 2;
+    color: $explorer-color;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover {
+        background: $explorer-item-bg-hover;
+    }
+
+    .icon {
+        margin-right: 10px;
+        font-size: 12px;
+    }
+
+    .subtitle {
+        color: darken($white, 40);
+        margin-left: 5px;
+    }
+
+    &.isSelected {
+        background: lighten($explorer-item-bg-selected, 10);
+
+        .subtitle {
+            color: darken($white, 10);
+        }
+    }
+}

@@ -1,9 +1,9 @@
-import { ISheetService } from '../services/sheets/ISheetService';
-import { computed, observable, action } from 'mobx';
-import { Sheet } from '../model/Sheet';
+import { ISheetService } from "../services/sheets/ISheetService";
+import { computed, observable, action } from "mobx";
+import { Sheet } from "../model/Sheet";
 export class FileExplorerViewModel {
     @observable
-    public openService: ISheetService | null = null;
+    openService: ISheetService | null = null;
 
     constructor(private register: ISheetService[]) {}
 

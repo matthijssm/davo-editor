@@ -1,0 +1,24 @@
+@import '../../essentials/styles/variables';
+
+.button {
+    all: unset;
+    padding: $control-padding;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    font-weight: bold;
+    border-radius: $border-radius;
+    font-size: 11px;
+
+    &.isFullWidth {
+        width: 100%;
+        text-align: center;
+    }
+
+    &:hover {
+        border-color: $color-primary;
+    }
+
+    &:active {
+        color: $color-primary;
+    }
+}

@@ -1,10 +1,10 @@
-import { ISheetService } from '../services/sheets/ISheetService';
-import { LocalSheetService } from '../services/sheets/LocalSheetService';
-import { FileExplorerViewModel } from '../viewModels/FileExplorerViewModel';
+import { ISheetService } from "../services/sheets/ISheetService";
+import { LocalSheetService } from "../services/sheets/LocalSheetService";
+import { FileExplorerViewModel } from "../viewModels/FileExplorerViewModel";
 
 export class FileExplorerController {
     private register: ISheetService[] = [];
-    public viewModel: FileExplorerViewModel;
+    viewModel: FileExplorerViewModel;
 
     constructor() {
         this.registerService();

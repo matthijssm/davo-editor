@@ -1,4 +1,5 @@
-import { IKeyJson } from './Key';
+import { IKeyJson } from "./Key";
+import { SectionJson } from "./Section";
 
 export interface ISheetJson {
     id: string;
@@ -6,16 +7,28 @@ export interface ISheetJson {
     subtitle: string;
     key: IKeyJson;
     capo: number;
+    tempo: number;
+
+    sections: SectionJson[];
 }
 
 export const sheetJsonSchema = {
-    id: 'string',
-    title: 'string',
-    subtitle: 'string',
+    id: "string",
+    title: "string",
+    subtitle: "string",
     key: {
-        note: 'string',
-        modifier: 'string',
-        mode: 'string',
+        note: "string",
+        modifier: "string",
+        mode: "string"
     },
-    capo: 'number',
+    capo: "number",
+    tempo: "number",
+    sections: {
+        type: "array",
+        items: {
+            id: "string",
+            label: "string",
+            lines: "array"
+        }
+    }
 };

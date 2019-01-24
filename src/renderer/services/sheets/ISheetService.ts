@@ -1,5 +1,5 @@
-import { IconDefinition } from '@fortawesome/pro-light-svg-icons';
-import { Sheet } from '../../model/Sheet';
+import { IconDefinition } from "@fortawesome/pro-light-svg-icons";
+import { Sheet } from "../../model/Sheet";
 
 export interface ISheetService {
     icon: IconDefinition;

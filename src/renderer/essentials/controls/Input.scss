@@ -1,0 +1,30 @@
+@import '../../essentials/styles/variables';
+
+.input {
+    transition-delay: 0s;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.2s;
+    transition-property: all;
+    transform-style: flat;
+    display: block;
+    background-color: $white;
+    // line-height: normal;
+    width: 100%;
+    box-sizing: border-box;
+    padding: $control-padding + 1 $control-padding;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    border-radius: $border-radius;
+    // font-size: 11px;
+    outline: none;
+
+    &:hover {
+        border-color: #c2c2c2;
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.08);
+    }
+
+    &:focus {
+        border-color: $color-primary;
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.15);
+    }
+}

@@ -1,19 +1,20 @@
-import { faFolder } from '@fortawesome/pro-light-svg-icons';
-import { remote } from 'electron';
-import fs from 'fs';
-import { observable, action, computed } from 'mobx';
-import * as uuid from 'uuid';
+import { faFolder } from "@fortawesome/pro-light-svg-icons";
+import { remote } from "electron";
+import fs from "fs";
+import { observable, action, computed } from "mobx";
+import * as uuid from "uuid";
 
-import { ISheetService } from './ISheetService';
-import { Sheet } from '../../model/Sheet';
-import { orderBy } from 'lodash';
+import { ISheetService } from "./ISheetService";
+import { Sheet } from "../../model/Sheet";
+import { orderBy } from "lodash";
+import { JsonParser } from "../../model/parsers/JsonParser";
 
-const dataPath = remote.app.getPath('userData') + '/davo-files';
+const dataPath = remote.app.getPath("userData") + "/davo-files";
 
 export class LocalSheetService implements ISheetService {
-    public name = 'Local Files';
+    name = "Local Files";
 
-    public icon = faFolder;
+    icon = faFolder;
 
     @observable
     private _sheets: Sheet[] = [];
@@ -24,7 +25,7 @@ export class LocalSheetService implements ISheetService {
 
     @computed
     get sheets(): Sheet[] {
-        return orderBy(this._sheets, ['title', 'subtitle'], 'asc');
+        return orderBy(this._sheets, ["title", "subtitle"], "asc");
     }
 
     @action
@@ -36,11 +37,11 @@ export class LocalSheetService implements ISheetService {
         const files = await this.getFilesFromDirectory();
 
         const sheets = files.map(file => {
-            const data = fs.readFileSync(dataPath + '/' + file, {
-                encoding: 'utf-8',
+            const data = fs.readFileSync(`${dataPath}/${file}`, {
+                encoding: "utf-8"
             });
 
-            return Sheet.fromJson(data);
+            return JsonParser.sheet(data);
         });
 
         return Promise.resolve(sheets);
@@ -50,11 +51,11 @@ export class LocalSheetService implements ISheetService {
         return new Promise<string[]>(resolve => {
             fs.readdir(dataPath, (error, dirFiles) => {
                 if (error) {
-                    console.info('Davo folder not initialized yet!');
+                    console.info("Davo folder not initialized yet!");
                     return;
                 }
 
-                const files = dirFiles.filter(file => file.endsWith('.davo'));
+                const files = dirFiles.filter(file => file.endsWith(".davo"));
 
                 return resolve(files);
             });
@@ -63,13 +64,13 @@ export class LocalSheetService implements ISheetService {
 
     async createSheet(): Promise<Sheet> {
         const creatingSheet = new Promise<Sheet>(resolve => {
-            const newSheet = new Sheet(null, 'Untitled Sheet', '');
+            const newSheet = new Sheet(null, "Untitled Sheet", "");
 
-            const filePath = dataPath + '/' + newSheet.ID + '.davo';
+            const filePath = `${dataPath}/${newSheet.ID}.davo`;
 
             fs.writeFile(filePath, newSheet.toJson(), error => {
                 if (error) {
-                    console.error('Writing Davo file failed!');
+                    console.error("Writing Davo file failed!");
                     return;
                 }
             });
@@ -91,11 +92,11 @@ export class LocalSheetService implements ISheetService {
 
     async saveSheet(sheet: Sheet): Promise<Sheet> {
         return new Promise<Sheet>(resolve => {
-            const filePath = dataPath + '/' + sheet.ID + '.davo';
+            const filePath = dataPath + "/" + sheet.ID + ".davo";
 
             fs.writeFile(filePath, sheet.toJson(), error => {
                 if (error) {
-                    console.error('Writing Davo file failed!');
+                    console.error("Writing Davo file failed!");
                     return;
                 }
             });

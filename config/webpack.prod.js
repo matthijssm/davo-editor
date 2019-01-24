@@ -1,20 +1,24 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
 
 let mainConfig = {
-    mode: 'production',
-    entry: './src/main/main.ts',
-    target: 'electron-main',
+    mode: "production",
+    entry: "./src/main/main.ts",
+    target: "electron-main",
     output: {
-        filename: 'main.bundle.js',
-        path: __dirname + '../dist',
+        filename: "main.bundle.js",
+        path: __dirname + "../dist"
     },
     node: {
         __dirname: false,
-        __filename: false,
+        __filename: false
     },
     resolve: {
-        extensions: ['.js', '.json', '.ts'],
+        extensions: [".js", ".json", ".ts"],
+        alias: {
+            essentials: __dirname + "/../src/renderer/essentials",
+            base: __dirname + "/../src/renderer/base"
+        }
     },
     module: {
         rules: [
@@ -23,41 +27,41 @@ let mainConfig = {
                 test: /\.(ts)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'ts-loader',
-                },
+                    loader: "ts-loader"
+                }
             },
             {
                 test: /\.(jpg|png|svg|ico|icns)$/,
-                loader: 'file-loader',
+                loader: "file-loader",
                 options: {
-                    name: '[path][name].[ext]',
-                },
+                    name: "[path][name].[ext]"
+                }
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
-                loader: 'file-loader',
+                loader: "file-loader",
                 options: {
-                    name: '[path][name].[ext]',
-                },
-            },
-        ],
-    },
+                    name: "[path][name].[ext]"
+                }
+            }
+        ]
+    }
 };
 
 let rendererConfig = {
-    mode: 'production',
-    entry: './src/renderer/renderer.tsx',
-    target: 'electron-renderer',
+    mode: "production",
+    entry: "./src/renderer/renderer.tsx",
+    target: "electron-renderer",
     output: {
-        filename: 'renderer.bundle.js',
-        path: __dirname + '/dist',
+        filename: "renderer.bundle.js",
+        path: __dirname + "/dist"
     },
     node: {
         __dirname: false,
-        __filename: false,
+        __filename: false
     },
     resolve: {
-        extensions: ['.js', '.json', '.ts', '.tsx'],
+        extensions: [".js", ".json", ".ts", ".tsx"]
     },
     module: {
         rules: [
@@ -66,38 +70,34 @@ let rendererConfig = {
                 test: /\.(ts|tsx)$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'ts-loader',
-                },
+                    loader: "ts-loader"
+                }
             },
             {
                 test: /\.(scss|css)$/,
-                use: [
-                    'style-loader',
-                    'css-loader?sourceMap',
-                    'sass-loader?sourceMap',
-                ],
+                use: ["style-loader", "css-loader?sourceMap", "sass-loader?sourceMap"]
             },
             {
                 test: /\.(jpg|png|svg|ico|icns)$/,
-                loader: 'file-loader',
+                loader: "file-loader",
                 options: {
-                    name: '[path][name].[ext]',
-                },
+                    name: "[path][name].[ext]"
+                }
             },
             {
                 test: /\.(eot|ttf|woff|woff2)$/,
-                loader: 'file-loader',
+                loader: "file-loader",
                 options: {
-                    name: '[path][name].[ext]',
-                },
-            },
-        ],
+                    name: "[path][name].[ext]"
+                }
+            }
+        ]
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, '../src/renderer/index.html'),
-        }),
-    ],
+            template: path.resolve(__dirname, "../src/renderer/index.html")
+        })
+    ]
 };
 
 module.exports = [mainConfig, rendererConfig];
