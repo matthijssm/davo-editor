@@ -1,4 +1,4 @@
-@import '../../essentials/styles/variables';
+@import "../../essentials/styles/variables";
 
 .input {
     transition-delay: 0s;
@@ -11,7 +11,7 @@
     // line-height: normal;
     width: 100%;
     box-sizing: border-box;
-    padding: $control-padding + 1 $control-padding;
+    padding: $control-padding;
     border: 1px solid $border-color;
     box-sizing: border-box;
     border-radius: $border-radius;

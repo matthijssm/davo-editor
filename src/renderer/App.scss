@@ -1,4 +1,15 @@
-@import './essentials/styles/variables';
+@import "./essentials/styles/variables";
+
+:global() {
+    body,
+    input,
+    textarea {
+        font-family: $font-family;
+        font-size: $font-size;
+
+        color: $body-color;
+    }
+}
 
 html {
     box-sizing: border-box;
@@ -11,11 +22,6 @@ html {
     flex-direction: column;
     background: $gray;
     height: 100%;
-
-    font-family: $font-family;
-    font-size: $font-size;
-
-    color: $body-color;
 
     box-sizing: border-box;
 }

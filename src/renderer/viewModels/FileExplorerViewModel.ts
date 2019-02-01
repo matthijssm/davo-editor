@@ -5,7 +5,9 @@ export class FileExplorerViewModel {
     @observable
     openService: ISheetService | null = null;
 
-    constructor(private register: ISheetService[]) {}
+    constructor(private register: ISheetService[]) {
+        this.openService = register[0];
+    }
 
     get services() {
         return this.register;

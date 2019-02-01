@@ -6,4 +6,6 @@ export interface ITabbedEditor {
     isLoading: boolean;
     isUnsaved: boolean;
     document: IDocument;
+
+    saveSheet(): void;
 }

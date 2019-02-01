@@ -1,10 +1,12 @@
 import * as uuid from "uuid";
 import { validate } from "jsonschema";
 import { IDocument } from "./IDocument";
-import { observable } from "mobx";
+import { observable, computed } from "mobx";
 import { ISheetJson, sheetJsonSchema } from "./ISheetJson";
 import { Key, Note, Mode, Modifier } from "./Key";
 import { Section } from "./Section";
+import { ISection } from "./ISection";
+import { IElement } from "./IElement";
 
 export class Sheet implements IDocument {
     ID: string;
@@ -15,7 +17,19 @@ export class Sheet implements IDocument {
     @observable capo: number = 0;
     @observable tempo: number = 0;
 
-    @observable sections: Section[] = observable.array([], { deep: true });
+    @observable sections: ISection[] = observable.array([], { deep: true });
+
+    @computed
+    get elements(): IElement[] {
+        const collection: IElement[] = [];
+
+        this.sections.forEach(section => {
+            collection.push(section);
+            collection.push(...section.elements);
+        });
+
+        return collection;
+    }
 
     constructor(id: string = null, title: string, subtitle: string) {
         this.ID = id === null ? uuid.v4() : id;

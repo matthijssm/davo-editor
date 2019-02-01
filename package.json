@@ -16,6 +16,7 @@
         "@types/classnames": "^2.2.6",
         "@types/react": "^16.7.8",
         "@types/react-dom": "^16.0.11",
+        "@types/react-sortable-hoc": "^0.6.4",
         "@types/uuid": "^3.4.4",
         "awesome-typescript-loader": "^5.2.1",
         "babel-loader": "^8.0.5",
@@ -52,6 +53,7 @@
         "mobx-react": "^5.4.2",
         "react": "^16.6.3",
         "react-dom": "^16.6.3",
+        "react-sortable-hoc": "^1.5.3",
         "uuid": "^3.3.2"
     }
 }

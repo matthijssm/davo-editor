@@ -1,7 +1,9 @@
 import { Key } from "./Key";
-import { Section } from "./Section";
+import { ISection } from "./ISection";
+import { IElementContainer } from "./IElementContainer";
+import { IElement } from "./IElement";
 
-export interface IDocument {
+export interface IDocument extends IElementContainer {
     ID: string;
 
     title: string;
@@ -11,7 +13,7 @@ export interface IDocument {
     capo: number;
     tempo: number;
 
-    sections: Section[];
+    sections: ISection[];
 
     toJson(): string;
 }

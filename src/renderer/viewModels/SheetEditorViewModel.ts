@@ -6,6 +6,7 @@ import { ISheetService } from "../services/sheets/ISheetService";
 import { isEmpty } from "lodash";
 import { Key } from "../model/Key";
 import { Section } from "../model/Section";
+import { IElement } from "../model/IElement";
 
 export type PropertiesPaneTabs = "Sheet" | "Meta";
 
@@ -20,6 +21,10 @@ export class SheetEditorViewModel implements ITabbedEditor {
 
     @observable
     openPropertiesPane: PropertiesPaneTabs = "Meta";
+
+    @observable selectedElement: IElement | null = null;
+
+    @observable caretPosition: number = 0;
 
     private documentObserverDisposer: IReactionDisposer;
 
@@ -90,5 +95,15 @@ export class SheetEditorViewModel implements ITabbedEditor {
 
         this.service.saveSheet(this.document);
         this.isUnsaved = false;
+    }
+
+    @action
+    setSelectedElement(element: IElement | null): void {
+        this.selectedElement = element;
+    }
+
+    @action
+    setCaretPosition(position: number): void {
+        this.caretPosition = position;
     }
 }

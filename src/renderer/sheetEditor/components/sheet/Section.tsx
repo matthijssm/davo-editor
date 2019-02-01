@@ -1,18 +1,32 @@
 import * as React from "react";
+import { observer, inject } from "mobx-react";
+import { SortableHandle } from "react-sortable-hoc";
+import { faTimes, faSort } from "@fortawesome/pro-light-svg-icons";
+
 import { ISection } from "../../../model/ISection";
-import { observer } from "mobx-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTimes } from "@fortawesome/pro-light-svg-icons";
+import { SectionOptions } from "./SectionOptions";
+import { SectionOptionButton } from "./SectionOptionButton";
+import { Line } from "./Line";
+import { ILine } from "./ILine";
+import { IElement } from "../../../model/IElement";
+import { Line as LineModel } from "../../../model/Line";
+import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 
 type SectionProps = {
     section: ISection;
+    selectedElement: IElement;
+    viewModel?: SheetEditorViewModel;
     onDelete?: (id: string) => void;
+    onSelectElement: (element: IElement) => void;
 };
 
 const styles = require("./Section.scss");
 
 const placeholder = "label";
 
+const DragHandle = SortableHandle(({ childeren }) => <SectionOptionButton icon={faSort} />);
+
+@inject("viewModel")
 @observer
 export class Section extends React.Component<SectionProps> {
     private labelInput = React.createRef<HTMLInputElement>();
@@ -32,10 +46,12 @@ export class Section extends React.Component<SectionProps> {
                         placeholder={placeholder}
                     />
                 </div>
-                <div className={styles.closeIcon} onClick={this.onDeleteSection}>
-                    <FontAwesomeIcon icon={faTimes} />
-                </div>
-                My id is {section.id}
+                <SectionOptions>
+                    <DragHandle />
+                    <SectionOptionButton icon={faTimes} onClick={this.onDeleteSection} />
+                </SectionOptions>
+
+                {this.renderLines(section.lines)}
             </div>
         );
     }
@@ -60,6 +76,64 @@ export class Section extends React.Component<SectionProps> {
         } else {
             this.labelInput.current.size = size;
         }
+    };
+
+    private renderLines(lines: ILine[]) {
+        return lines.map((line, index) => {
+            const isActive = this.props.selectedElement && line.id === this.props.selectedElement.id;
+
+            return (
+                <Line
+                    key={line.id}
+                    line={line}
+                    isActive={isActive}
+                    onNewLine={this.onNewLine(line)}
+                    onRemove={this.onRemove(line)}
+                    onFocus={this.props.onSelectElement}
+                    onArrowDown={this.onArrowDown(index)}
+                    onArrowUp={this.onArrowUp(index)}
+                />
+            );
+        });
+    }
+
+    private onArrowDown = (currentIndex: number) => {
+        const { onSelectElement, section } = this.props;
+        return (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (currentIndex < section.lines.length - 1) {
+                onSelectElement(section.lines[currentIndex + 1]);
+                event.preventDefault();
+            } else {
+                const allLines = section.elements.filter(element => element instanceof LineModel);
+            }
+        };
+    };
+
+    private onArrowUp = (currentIndex: number) => {
+        const { onSelectElement, section } = this.props;
+
+        return (event: React.KeyboardEvent<HTMLInputElement>) => {
+            if (currentIndex > 0) {
+                onSelectElement(section.lines[currentIndex - 1]);
+                event.preventDefault();
+            }
+        };
+    };
+
+    private onNewLine = (line: ILine) => {
+        return (value: string) => {
+            const { section, onSelectElement } = this.props;
+            const newLine = section.addLine(value, line);
+            onSelectElement(newLine);
+        };
+    };
+
+    private onRemove = (line: ILine) => {
+        return (value: string) => {
+            const { section, onSelectElement } = this.props;
+            const retainedLine = section.removeLine(value, line);
+            onSelectElement(retainedLine);
+        };
     };
 
     componentDidMount() {

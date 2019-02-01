@@ -4,6 +4,8 @@ import * as url from "url";
 
 let mainWindow: Electron.BrowserWindow;
 
+const shell = require("electron").shell;
+
 function createWindow() {
     mainWindow = new BrowserWindow({
         height: 600,
@@ -11,18 +13,104 @@ function createWindow() {
         minWidth: 906,
         minHeight: 600,
         frame: false,
+        title: "Davo Editor"
     });
 
-    // const menu = new Menu();
-    // menu.append(new MenuItem({ label: 'Je moeder', role: 'window' }));
-
-    // Menu.setApplicationMenu(menu);
+    const menu = Menu.buildFromTemplate([
+        {
+            label: "Davo Editor",
+            submenu: [
+                {
+                    label: "About Davo Editor",
+                    click() {
+                        shell.openExternal("https://davo.pro");
+                    }
+                },
+                { type: "separator" },
+                {
+                    label: "Show Developer Tools",
+                    accelerator: "Alt+Super+I",
+                    click() {
+                        mainWindow.webContents.toggleDevTools();
+                    }
+                },
+                {
+                    label: "Reload",
+                    accelerator: "CmdOrCtrl+R",
+                    click() {
+                        mainWindow.webContents.send("reload");
+                    }
+                },
+                { type: "separator" },
+                {
+                    label: "Quit Davo Editor",
+                    click() {
+                        app.quit();
+                    },
+                    accelerator: "CmdOrCtrl+Q"
+                }
+            ]
+        },
+        {
+            label: "File",
+            submenu: [
+                {
+                    label: "Save",
+                    accelerator: "CmdOrCtrl+S",
+                    click() {
+                        mainWindow.webContents.send("save");
+                    }
+                },
+                { type: "separator" },
+                {
+                    label: "Close Tab/Window",
+                    accelerator: "CmdOrCtrl+W",
+                    click() {
+                        mainWindow.webContents.send("close");
+                    }
+                }
+            ]
+        },
+        {
+            label: "Edit",
+            submenu: [
+                {
+                    role: "undo"
+                },
+                {
+                    role: "redo"
+                },
+                {
+                    type: "separator"
+                },
+                {
+                    role: "cut"
+                },
+                {
+                    role: "copy"
+                },
+                {
+                    role: "paste"
+                },
+                {
+                    role: "pasteandmatchstyle"
+                },
+                {
+                    role: "delete"
+                },
+                {
+                    role: "selectall"
+                }
+            ]
+        }
+    ]);
+    Menu.setApplicationMenu(menu);
 
     mainWindow.loadURL(
         url.format({
             pathname: path.join(__dirname, "./index.html"),
             protocol: "file:",
-            slashes: true,
+            slashes: true
         })
     );
 
