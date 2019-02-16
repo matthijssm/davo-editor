@@ -9,18 +9,28 @@
     border-radius: $border-radius;
 
     &.isActive {
-        border: 1px solid $border-color-highlight;
+        // border: 1px solid $border-color-highlight;
     }
 }
 
 .line {
     padding: 2px 0;
     margin: 0;
-    height: 18px;
 }
 
-.line,
 .lineInput {
     font-size: $line-font-size;
     color: black;
+}
+
+.line {
+    display: flex;
+    width: 100%;
+    font-size: $line-font-size;
+    color: black;
+}
+
+.dropzone {
+    border: 1px solid #bbb;
+    box-sizing: border-box;
 }

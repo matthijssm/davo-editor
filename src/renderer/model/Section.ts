@@ -2,7 +2,7 @@ import uuid from "uuid";
 
 import { ISection } from "./ISection";
 import { observable } from "mobx";
-import { ILine, LineJson } from "../sheetEditor/components/sheet/ILine";
+import { ILine, LineJson } from "./ILine";
 import { Line } from "./Line";
 import { IElement } from "./IElement";
 

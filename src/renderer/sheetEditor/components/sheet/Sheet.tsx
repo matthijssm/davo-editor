@@ -74,6 +74,7 @@ export class Sheet extends React.Component<SheetProps> {
                         onDelete={this.onDeleteSection}
                         onSelectElement={this.onSelectElement}
                         selectedElement={this.props.viewModel.selectedElement}
+                        viewModel={this.props.viewModel}
                     />
                 </SortableItem>
             );

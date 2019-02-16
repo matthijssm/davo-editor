@@ -2,11 +2,15 @@ import { validate } from "jsonschema";
 
 import { Sheet } from "../Sheet";
 import { sheetJsonSchema, ISheetJson } from "../ISheetJson";
-import { Key, Note, Modifier, Mode } from "../Key";
+import { Key } from "../Key";
 import { SectionJson, Section } from "../Section";
 import { Line } from "../Line";
-import { LineJson, ILine, LineType } from "../../sheetEditor/components/sheet/ILine";
+import { LineJson, ILine, LineType } from "../ILine";
 import { ISection } from "../ISection";
+import { Note, Modifier, Mode, Quality } from "../IMusic";
+import { ChordJson, IChord } from "../IChord";
+import { ChordBase } from "../ChordBase";
+import { Chord } from "../Chord";
 
 export namespace JsonParser {
     export function sheet(json: string): Sheet {
@@ -49,8 +53,24 @@ export namespace JsonParser {
 
             newLine.type = (LineType as any)[lineJson.type];
             newLine.content = lineJson.content;
+            newLine.chords = chords(lineJson.chords);
 
             return newLine;
+        });
+    }
+
+    function chords(parsedJson: ChordJson[]): IChord[] {
+        return parsedJson.map(chordJson => {
+            const chordBase = new ChordBase(
+                chordJson.base,
+                (Modifier as any)[chordJson.modifier],
+                (Quality as any)[chordJson.quality],
+                chordJson.adjectives,
+                chordJson.inversionBase,
+                (Modifier as any)[chordJson.inversionModifier]
+            );
+
+            return new Chord(chordBase, chordJson.position, chordJson.id);
         });
     }
 }

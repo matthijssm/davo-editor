@@ -1,0 +1,36 @@
+@import "../../../../essentials/styles/variables";
+
+.chord {
+    padding: 5px 10px;
+    background: $border-color;
+    border-radius: $border-radius;
+    font-weight: bold;
+    display: inline-flex;
+    margin: 5px 3px;
+    user-select: none;
+    box-sizing: border-box;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+
+    &:hover {
+        background: lighten($border-color, $lighten-amount);
+        cursor: pointer;
+    }
+
+    &.isInline {
+        padding: 0px 1px;
+        line-height: normal;
+        margin: 0;
+        border: 1px solid lighten($border-color, $lighten-amount);
+    }
+
+    &.isSelected {
+        border: 1px solid $color-primary;
+    }
+}

@@ -15,7 +15,8 @@
             "essentials/*": ["essentials/*"],
             "base": ["base"],
             "base/*": ["base/*"]
-        }
+        },
+        "emitDecoratorMetadata": true
     },
     "exclude": ["node_modules"]
 }

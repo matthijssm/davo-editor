@@ -1,5 +1,8 @@
+import "reflect-metadata";
+
 import { remote, BrowserWindow } from "electron";
 import { observable, action } from "mobx";
+
 import { FileExplorerController } from "../controllers/FileExplorerController";
 import { IDocument } from "../model/IDocument";
 import { ITabbedEditor } from "../controls/ITabbedEditor";
@@ -16,6 +19,8 @@ export class EditorState {
 
     @observable
     activeEditor: ITabbedEditor | null = null;
+
+    @observable isDragging: boolean = true;
 
     @action
     openEditor(document: IDocument) {

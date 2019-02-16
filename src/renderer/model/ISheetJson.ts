@@ -28,7 +28,25 @@ export const sheetJsonSchema = {
         items: {
             id: "string",
             label: "string",
-            lines: "array"
+            lines: {
+                type: "array",
+                items: {
+                    id: "string",
+                    type: "string",
+                    content: "string",
+                    chords: {
+                        type: "array",
+                        items: {
+                            base: "number",
+                            modifier: "string",
+                            quality: "string",
+                            adjectives: "string",
+                            inversionBase: "number",
+                            inversionModifier: "string"
+                        }
+                    }
+                }
+            }
         }
     }
 };

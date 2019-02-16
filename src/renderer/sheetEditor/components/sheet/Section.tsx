@@ -7,7 +7,7 @@ import { ISection } from "../../../model/ISection";
 import { SectionOptions } from "./SectionOptions";
 import { SectionOptionButton } from "./SectionOptionButton";
 import { Line } from "./Line";
-import { ILine } from "./ILine";
+import { ILine } from "../../../model/ILine";
 import { IElement } from "../../../model/IElement";
 import { Line as LineModel } from "../../../model/Line";
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
@@ -15,7 +15,7 @@ import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 type SectionProps = {
     section: ISection;
     selectedElement: IElement;
-    viewModel?: SheetEditorViewModel;
+    viewModel: SheetEditorViewModel;
     onDelete?: (id: string) => void;
     onSelectElement: (element: IElement) => void;
 };
@@ -26,7 +26,6 @@ const placeholder = "label";
 
 const DragHandle = SortableHandle(({ childeren }) => <SectionOptionButton icon={faSort} />);
 
-@inject("viewModel")
 @observer
 export class Section extends React.Component<SectionProps> {
     private labelInput = React.createRef<HTMLInputElement>();
@@ -92,6 +91,7 @@ export class Section extends React.Component<SectionProps> {
                     onFocus={this.props.onSelectElement}
                     onArrowDown={this.onArrowDown(index)}
                     onArrowUp={this.onArrowUp(index)}
+                    viewModel={this.props.viewModel}
                 />
             );
         });
@@ -103,8 +103,6 @@ export class Section extends React.Component<SectionProps> {
             if (currentIndex < section.lines.length - 1) {
                 onSelectElement(section.lines[currentIndex + 1]);
                 event.preventDefault();
-            } else {
-                const allLines = section.elements.filter(element => element instanceof LineModel);
             }
         };
     };

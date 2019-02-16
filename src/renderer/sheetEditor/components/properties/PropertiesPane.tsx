@@ -5,6 +5,7 @@ import { Bar, BarTab } from "essentials";
 
 import { MetaPane } from "./MetaPane";
 import { SheetEditorViewModel, PropertiesPaneTabs } from "../../../viewModels/SheetEditorViewModel";
+import { SheetPane } from "./SheetPane";
 
 type PropertiesPaneProps = {
     viewModel: SheetEditorViewModel;
@@ -34,7 +35,11 @@ export class PropertiesPane extends React.Component<PropertiesPaneProps> {
                     />
                 </Bar>
                 <div className={styles.content}>
-                    {viewModel.openPropertiesPane === "Meta" ? <MetaPane viewModel={viewModel} /> : null}
+                    {viewModel.openPropertiesPane === "Meta" ? (
+                        <MetaPane viewModel={viewModel} />
+                    ) : (
+                        <SheetPane viewModel={viewModel} />
+                    )}
                 </div>
             </div>
         );

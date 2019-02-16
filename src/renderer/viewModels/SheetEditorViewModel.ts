@@ -7,8 +7,15 @@ import { isEmpty } from "lodash";
 import { Key } from "../model/Key";
 import { Section } from "../model/Section";
 import { IElement } from "../model/IElement";
+import { IChordBase } from "../model/IChordBase";
+import { ILine } from "../model/ILine";
 
 export type PropertiesPaneTabs = "Sheet" | "Meta";
+
+export enum EditorMode {
+    Text,
+    Chords
+}
 
 export class SheetEditorViewModel implements ITabbedEditor {
     isLoading: boolean = false;
@@ -20,11 +27,13 @@ export class SheetEditorViewModel implements ITabbedEditor {
     document: Sheet;
 
     @observable
-    openPropertiesPane: PropertiesPaneTabs = "Meta";
+    openPropertiesPane: PropertiesPaneTabs = "Sheet";
 
     @observable selectedElement: IElement | null = null;
 
     @observable caretPosition: number = 0;
+
+    @observable editorMode: EditorMode = EditorMode.Chords;
 
     private documentObserverDisposer: IReactionDisposer;
 
@@ -48,6 +57,10 @@ export class SheetEditorViewModel implements ITabbedEditor {
     @computed
     get label(): string {
         return this.document.title;
+    }
+
+    get key(): Key {
+        return this.document.key;
     }
 
     @action

@@ -1,0 +1,22 @@
+@import "../../../essentials/styles/variables";
+
+.pair {
+    display: flex;
+    flex-direction: column;
+
+    .chord {
+        height: 18px;
+        font-weight: bold;
+
+        margin-right: 2px;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+    .lyric {
+        height: 18px;
+    }
+}

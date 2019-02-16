@@ -1,10 +1,8 @@
 import * as uuid from "uuid";
-import { validate } from "jsonschema";
 import { IDocument } from "./IDocument";
 import { observable, computed } from "mobx";
-import { ISheetJson, sheetJsonSchema } from "./ISheetJson";
-import { Key, Note, Mode, Modifier } from "./Key";
-import { Section } from "./Section";
+import { ISheetJson } from "./ISheetJson";
+import { Key } from "./Key";
 import { ISection } from "./ISection";
 import { IElement } from "./IElement";
 

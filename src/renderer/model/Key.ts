@@ -1,25 +1,7 @@
-import { extendObservable, observable } from "mobx";
-
-export enum Mode {
-    Major,
-    Minor,
-}
-
-export enum Note {
-    A,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-}
-
-export enum Modifier {
-    Sharp,
-    Flat,
-    None,
-}
+import { observable } from "mobx";
+import { Note, Mode, Modifier } from "./IMusic";
+import { MusicUtils } from "../sheetEditor/utils/MusicUtils";
+import { TheoryData } from "../sheetEditor/chords/TheoryData";
 
 export type IKeyJson = {
     note: string;
@@ -35,11 +17,7 @@ export class Key {
     @observable
     mode: Mode;
 
-    constructor(
-        note: Note = Note.A,
-        modifier: Modifier = Modifier.None,
-        mode: Mode = Mode.Major
-    ) {
+    constructor(note: Note = Note.A, modifier: Modifier = Modifier.None, mode: Mode = Mode.Major) {
         this.note = note;
         this.modifier = modifier;
         this.mode = mode;
@@ -49,30 +27,39 @@ export class Key {
         return {
             note: Note[this.note],
             modifier: Modifier[this.modifier],
-            mode: Mode[this.mode],
+            mode: Mode[this.mode]
         };
     }
 
     toString(): string {
-        return `${
-            Note[this.note]
-        }${this.getModifierString()}${this.getModeString()}`;
+        return `${Note[this.note]}${this.getModifierString()}${this.getModeString()}`;
+    }
+
+    baseToString(): string {
+        return `${Note[this.note]}${this.getModifierString()}`;
+    }
+
+    isTheoretical(): boolean {
+        return TheoryData.THEORETICAL_KEYS.has(this.baseToString());
     }
 
     private getModifierString(): string {
-        if (this.modifier === Modifier.Flat) {
-            return "b";
-        }
-
-        if (this.modifier === Modifier.Sharp) {
-            return "#";
-        }
-
-        return "";
+        return MusicUtils.modifierToString(this.modifier);
     }
 
     private getModeString(): string {
-        if (this.mode === Mode.Minor) return "m";
-        return "";
+        return MusicUtils.modeToString(this.mode);
+    }
+
+    getModifierMode(): Modifier {
+        if (this.modifier !== Modifier.None) {
+            return this.modifier;
+        }
+
+        if (this.note === Note.F) {
+            return Modifier.Flat;
+        }
+
+        return Modifier.Sharp;
     }
 }

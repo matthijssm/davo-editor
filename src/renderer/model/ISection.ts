@@ -1,5 +1,5 @@
 import { IElement } from "./IElement";
-import { ILine } from "../sheetEditor/components/sheet/ILine";
+import { ILine } from "./ILine";
 import { SectionJson } from "./Section";
 import { IElementContainer } from "./IElementContainer";
 
