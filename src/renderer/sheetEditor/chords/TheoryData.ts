@@ -34,4 +34,12 @@ export namespace TheoryData {
         [8, { defaultQuality: Quality.Major, degree: 6 }],
         [10, { defaultQuality: Quality.Dimished, degree: 7 }]
     ]);
+
+    // Regex
+
+    export const REGEX_MINOR_CHORD = /^m(?!aj)/g;
+
+    export const REGEX_DIMINISHED_CHORD = /^dim/g;
+
+    export const REGEX_AUGMENTED_CHORD = /^aug/g;
 }

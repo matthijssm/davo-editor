@@ -40,8 +40,10 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
                                 isSelected={isChordSelected}
                                 chord={chord}
                                 baseKey={baseKey}
-                                onDragEndWithDrop={this.onDragEndWithDrop}
+                                onDragEndWithDrop={this.removeChord}
                                 onClick={this.onChordClick}
+                                onDelete={this.removeChord}
+                                isEditable={true}
                             />
                         )}
                     </span>
@@ -73,7 +75,7 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
         });
     }
 
-    private onDragEndWithDrop = () => {
+    private removeChord = () => {
         const { chord, onDeleteChord } = this.props;
 
         return onDeleteChord && onDeleteChord(chord);

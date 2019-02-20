@@ -12,6 +12,8 @@ import {
 import { IChordBase } from "../../../../model/IChordBase";
 import { Key } from "../../../../model/Key";
 import { observer } from "mobx-react";
+import { observable, action } from "mobx";
+import { AlphabetToChordBaseTranslator } from "../../../chords/AlphabetToChordBaseTranslator";
 
 interface DraggableChordProps {
     chord: IChordBase;
@@ -19,10 +21,12 @@ interface DraggableChordProps {
     isInline?: boolean;
     isSelected?: boolean;
     isDisabled?: boolean;
+    isEditable?: boolean;
     onClick?: () => void;
     onDragStart?: () => void;
     onDragEnd?: () => void;
     onDragEndWithDrop?: () => void;
+    onDelete?: () => void;
 }
 
 interface DragProps {
@@ -72,16 +76,94 @@ const styles = require("./DraggableChord.scss");
 
 @observer
 class DraggableChordClass extends React.Component<Props> {
-    render() {
-        const { chord, baseKey, connectDragSource, isInline, onClick, isSelected } = this.props;
+    @observable private isEditing: boolean = false;
 
-        const className = classNames(styles.chord, { [styles.isInline]: isInline, [styles.isSelected]: isSelected });
+    @observable private inputValue: string;
+
+    private inputField = React.createRef<HTMLInputElement>();
+
+    render() {
+        const { chord, baseKey, connectDragSource, isInline, onClick, isEditable } = this.props;
+
+        const className = classNames(styles.chord, { [styles.isInline]: isInline });
 
         return connectDragSource(
-            <div className={className} onClick={onClick}>
-                {chord.toAlphabethString(baseKey)}
+            <div
+                className={className}
+                onClick={onClick}
+                tabIndex={0}
+                onKeyDown={this.onKeyDown}
+                onDoubleClick={this.setIsEditing(true)}
+            >
+                {isEditable && this.isEditing ? (
+                    <input
+                        value={this.inputValue}
+                        onChange={this.onChange}
+                        type="text"
+                        size={this.inputValue.length ? this.inputValue.length : 1}
+                        className={styles.chordInput}
+                        onFocus={this.onFocus}
+                        onBlur={this.finishEditing}
+                        ref={this.inputField}
+                    />
+                ) : (
+                    chord.toAlphabethString(baseKey)
+                )}
             </div>
         );
+    }
+
+    @action
+    private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        this.inputValue = event.target.value;
+    };
+
+    private onFocus = (event: React.FocusEvent<HTMLInputElement>) => {
+        this.inputField.current.select();
+    };
+
+    private finishEditing = () => {
+        const { chord, baseKey } = this.props;
+
+        const chordString = this.inputField.current.value;
+        const parsedChord = AlphabetToChordBaseTranslator.translate(chordString, baseKey);
+
+        if (parsedChord) {
+            chord.updateChord(parsedChord);
+        }
+
+        this.inputValue = chord.toAlphabethString(baseKey);
+        this.setIsEditing(false)();
+    };
+
+    private setIsEditing = (newValue: boolean) => {
+        return () => {
+            this.isEditing = newValue;
+        };
+    };
+
+    private onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+        switch (event.keyCode) {
+            case 8:
+            case 46:
+                if (!this.isEditing) {
+                    this.props.onDelete && !this.isEditing && this.props.onDelete();
+                }
+                break;
+            case 13:
+                this.finishEditing();
+                break;
+        }
+    };
+
+    componentWillMount() {
+        this.inputValue = this.props.chord.toAlphabethString(this.props.baseKey);
+    }
+
+    componentDidUpdate() {
+        if (this.isEditing) {
+            this.inputField.current.focus();
+        }
     }
 }
 

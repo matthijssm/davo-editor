@@ -22,6 +22,11 @@ export class Chord extends ChordBase implements IChord {
         this.position = position ? position : 0;
     }
 
+    updateChord(chord: ChordBase): IChord {
+        super.updateChord(chord);
+        return this;
+    }
+
     toJsonObject(): ChordJson {
         return {
             id: this.id,

@@ -51,7 +51,7 @@ export class Key {
         return MusicUtils.modeToString(this.mode);
     }
 
-    getModifierMode(): Modifier {
+    getModifierMode(): Modifier.Flat | Modifier.Sharp {
         if (this.modifier !== Modifier.None) {
             return this.modifier;
         }

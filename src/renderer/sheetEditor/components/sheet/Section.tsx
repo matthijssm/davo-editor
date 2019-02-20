@@ -24,7 +24,7 @@ const styles = require("./Section.scss");
 
 const placeholder = "label";
 
-const DragHandle = SortableHandle(({ childeren }) => <SectionOptionButton icon={faSort} />);
+const DragHandle = SortableHandle(() => <SectionOptionButton icon={faSort} />);
 
 @observer
 export class Section extends React.Component<SectionProps> {

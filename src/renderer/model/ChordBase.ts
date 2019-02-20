@@ -32,6 +32,17 @@ export class ChordBase implements IChordBase {
         return alphabethString;
     }
 
+    updateChord(chord: ChordBase): IChordBase {
+        this.base = chord.base;
+        this.modifier = chord.modifier;
+        this.quality = chord.quality;
+        this.adjectives = chord.adjectives;
+        this.inversionBase = chord.inversionBase;
+        this.inversionModifier = chord.inversionModifier;
+
+        return this;
+    }
+
     toString(): string {
         return this.base.toString();
     }
