@@ -20,7 +20,7 @@ export class EditorState {
     @observable
     activeEditor: ITabbedEditor | null = null;
 
-    @observable isDragging: boolean = true;
+    @observable isDragging: boolean = false;
 
     @action
     openEditor(document: IDocument) {

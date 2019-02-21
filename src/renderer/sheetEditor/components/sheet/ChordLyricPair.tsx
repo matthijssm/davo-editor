@@ -1,5 +1,5 @@
 import * as React from "react";
-import { observer } from "mobx-react";
+import { observer, inject } from "mobx-react";
 
 import { IChord } from "../../../model/IChord";
 import { Key } from "../../../model/Key";
@@ -8,6 +8,7 @@ import { IChordBase } from "../../../model/IChordBase";
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { DraggableChord } from "../properties/controls/DraggableChord";
 import { MoveDirection } from "../../chords/ChordMover";
+import { EditorState } from "../../../base";
 
 type ChordLyricPairProps = {
     lyrics?: string;
@@ -16,6 +17,7 @@ type ChordLyricPairProps = {
     showChords: boolean;
     viewModel: SheetEditorViewModel;
     startPosition: number;
+    editorState?: EditorState;
     onChordMove?: (chord: IChord, direction: MoveDirection) => void;
     onChange?: (newValue: string) => void;
     onChordDrop?: (position: number, chord: IChordBase) => void;
@@ -24,6 +26,7 @@ type ChordLyricPairProps = {
 
 const styles = require("./ChordLyricPair.scss");
 
+@inject("editorState")
 @observer
 export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
     render() {
@@ -41,6 +44,8 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
                                 isSelected={isChordSelected}
                                 chord={chord}
                                 baseKey={baseKey}
+                                onDragStart={this.onDragStart}
+                                onDragEnd={this.onDragEnd}
                                 onDragEndWithDrop={this.removeChord}
                                 onClick={this.onChordClick}
                                 onDelete={this.removeChord}
@@ -54,6 +59,14 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
             </span>
         );
     }
+
+    private onDragStart = () => {
+        this.props.editorState.isDragging = true;
+    };
+
+    private onDragEnd = () => {
+        this.props.editorState.isDragging = false;
+    };
 
     private onChordClick = () => {
         const { viewModel, chord } = this.props;

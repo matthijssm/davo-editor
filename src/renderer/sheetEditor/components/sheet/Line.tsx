@@ -4,17 +4,18 @@ import classNames from "classnames";
 
 import { ILine } from "../../../model/ILine";
 import { IElement } from "../../../model/IElement";
-import { SheetEditorViewModel, EditorMode } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { IChordBase } from "../../../model/IChordBase";
 import { ChordLyricPair } from "./ChordLyricPair";
 import { IChord } from "../../../model/IChord";
-import { Chord } from "../../../model/Chord";
 import { MoveDirection, ChordMover } from "../../chords/ChordMover";
+import { EditorState } from "../../../base";
 
 type LineProps = {
     line: ILine;
     isActive: boolean;
     viewModel: SheetEditorViewModel;
+    editorState?: EditorState;
     onArrowUp: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     onArrowDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
     onNewLine?: (value: string) => void;
@@ -24,30 +25,31 @@ type LineProps = {
 
 const styles = require("./Line.scss");
 
+@inject("editorState")
 @observer
 export class Line extends React.Component<LineProps> {
     private contentField = React.createRef<HTMLInputElement>();
 
     render() {
-        const { line, isActive, viewModel } = this.props;
+        const { line, editorState } = this.props;
 
-        const className = classNames(styles.lineInput, {
-            [styles.isActive]: isActive
-        });
-
-        return viewModel.editorMode === EditorMode.Chords ? (
-            <div className={styles.line}>{this.renderChordLyricsPairs()}</div>
-        ) : (
-            <input
-                type="text"
-                ref={this.contentField}
-                className={className}
-                onKeyDown={this.onKeyDown}
-                onChange={this.onChange}
-                onBlur={this.onBlur}
-                value={line.content}
-                onFocus={this.onFocus}
-            />
+        return (
+            <div className={styles.line}>
+                {this.renderChordLyricsPairs()}
+                {!editorState.isDragging && (
+                    <input
+                        type="text"
+                        ref={this.contentField}
+                        className={styles.lineInput}
+                        onKeyDown={this.onKeyDown}
+                        onChange={this.onChange}
+                        onBlur={this.onBlur}
+                        value={line.content}
+                        onFocus={this.onFocus}
+                        onPaste={this.onPaste}
+                    />
+                )}
+            </div>
         );
     }
 

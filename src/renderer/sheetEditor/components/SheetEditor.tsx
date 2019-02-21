@@ -5,7 +5,7 @@ import { action } from "mobx";
 import { Bar, EditableBarTab, BarTab, Group, RadioButtonGroup, InsideLabelRadioButton } from "essentials";
 
 import { PropertiesPane } from "./properties/PropertiesPane";
-import { SheetEditorViewModel, EditorMode } from "../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
 import { Sheet } from "./sheet/Sheet";
 
 type SheetEditorProps = {
@@ -38,10 +38,6 @@ export class SheetEditor extends React.Component<SheetEditorProps> {
                         </Group>
                     </Bar>
                     <div className={styles.sheetEditor}>
-                        <RadioButtonGroup onChange={this.setEditorMode} currentValue={EditorMode[viewModel.editorMode]}>
-                            <InsideLabelRadioButton caption="Chords" value={EditorMode[EditorMode.Chords]} />
-                            <InsideLabelRadioButton caption="Text" value={EditorMode[EditorMode.Text]} />
-                        </RadioButtonGroup>
                         <Sheet viewModel={viewModel} />
                     </div>
                 </div>
@@ -51,10 +47,6 @@ export class SheetEditor extends React.Component<SheetEditorProps> {
             </>
         );
     }
-
-    private setEditorMode = (mode: string) => {
-        this.props.viewModel.editorMode = (EditorMode as any)[mode];
-    };
 
     @action
     private setLabel = (event: ChangeEvent<HTMLInputElement>) => {

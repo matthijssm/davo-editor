@@ -12,11 +12,6 @@ import { ILine } from "../model/ILine";
 
 export type PropertiesPaneTabs = "Sheet" | "Meta";
 
-export enum EditorMode {
-    Text,
-    Chords
-}
-
 export class SheetEditorViewModel implements ITabbedEditor {
     isLoading: boolean = false;
 
@@ -32,8 +27,6 @@ export class SheetEditorViewModel implements ITabbedEditor {
     @observable selectedElement: IElement | null = null;
 
     @observable caretPosition: number = 0;
-
-    @observable editorMode: EditorMode = EditorMode.Chords;
 
     private documentObserverDisposer: IReactionDisposer;
 
