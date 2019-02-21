@@ -9,23 +9,19 @@ import { Chord } from "./Chord";
 
 export class Line implements ILine {
     id: string;
-    private _content: string;
+    @observable content: string;
     @observable type: LineType = LineType.Lyric;
 
     @observable chords: IChord[] = [];
 
     constructor(id?: string, content?: string) {
         this.id = id ? id : uuid.v4();
-        this._content = content ? content : "";
+        this.content = content ? content : "";
     }
 
     @computed
-    get content(): string {
-        return ` ${this._content} `;
-    }
-
-    set content(value: string) {
-        this._content = value;
+    get displayContent(): string {
+        return ` ${this.content} `;
     }
 
     @computed

@@ -70,13 +70,13 @@ export class Line extends React.Component<LineProps> {
 
             // Create the start of the sentence.
             if (sortedChords[0].position > 0) {
-                const lyrics = line.content.substring(0, sortedChords[0].position);
+                const lyrics = line.displayContent.substring(0, sortedChords[0].position);
                 chordLyricPairs.push(<ChordLyricPair key={0} lyrics={lyrics} startPosition={0} {...pairProps} />);
             }
 
             sortedChords.forEach((chord, index, chords) => {
-                const nextPosition = chords[index + 1] ? chords[index + 1].position : line.content.length;
-                const lyrics = line.content.substring(chord.position, nextPosition);
+                const nextPosition = chords[index + 1] ? chords[index + 1].position : line.displayContent.length;
+                const lyrics = line.displayContent.substring(chord.position, nextPosition);
 
                 chordLyricPairs.push(
                     <ChordLyricPair
@@ -92,7 +92,7 @@ export class Line extends React.Component<LineProps> {
 
             return chordLyricPairs;
         } else {
-            return <ChordLyricPair lyrics={line.content} startPosition={0} {...pairProps} />;
+            return <ChordLyricPair lyrics={line.displayContent} startPosition={0} {...pairProps} />;
         }
     }
 

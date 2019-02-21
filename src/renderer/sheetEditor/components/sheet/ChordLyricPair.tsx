@@ -72,6 +72,7 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
                     content={character}
                     onChordDrop={this.props.onChordDrop}
                     isDisabled={isDisabled}
+                    fullHeight={this.props.showChords}
                 />
             );
         });

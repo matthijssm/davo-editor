@@ -18,6 +18,7 @@ export type LineJson = {
 export interface ILine extends IElement, IElementContainer {
     type: LineType;
     content: string;
+    displayContent: string;
     chords: IChord[];
     hasChords: boolean;
 

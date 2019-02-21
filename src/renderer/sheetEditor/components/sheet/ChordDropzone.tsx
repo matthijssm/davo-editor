@@ -10,6 +10,7 @@ type ChordDropperProps = {
     position: number;
     chord?: IChord;
     isDisabled?: boolean;
+    fullHeight?: boolean;
     onChordDrop?: (position: number, chord: IChordBase) => void;
 };
 
@@ -41,15 +42,15 @@ type Props = ChordDropperProps & DropTargetProps;
 
 export class ChordDropzoneClass extends React.Component<Props> {
     render() {
-        const { content, isOver, canDrop, connectDropTarget } = this.props;
+        const { content, isOver, canDrop, connectDropTarget, fullHeight } = this.props;
 
         const className = classNames(styles.dropzone, {
             [styles.canDrop]: isOver && canDrop
         });
 
-        return (
+        return connectDropTarget(
             <span className={className}>
-                {connectDropTarget(<div className={styles.extendedDropzone} />)}
+                {fullHeight && <div className={styles.extendedDropzone} />}
                 {content}
             </span>
         );
