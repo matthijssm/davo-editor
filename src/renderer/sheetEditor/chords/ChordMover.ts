@@ -1,6 +1,5 @@
 import { IChord } from "../../model/IChord";
 import { ILine } from "../../model/ILine";
-import { action } from "mobx";
 
 export enum MoveDirection {
     Right,
@@ -9,28 +8,76 @@ export enum MoveDirection {
 
 export namespace ChordMover {
     export function move(chord: IChord, line: ILine, direction: MoveDirection) {
-        const positions = line.chords.map(mapChord => mapChord.position);
+        const chordsOnCurrentPosition = line.chords
+            .filter(c => c.position === chord.position)
+            .sort((a, b) => a.order - b.order);
 
-        const newPosition = getNewPosition(chord.position, direction);
-
-        if (positions.indexOf(newPosition) > -1) {
-            const chordToSwap = line.chords.find(searchChord => searchChord.position === newPosition);
-            setNewPosition(chordToSwap, chord.position, line);
-            setNewPosition(chord, newPosition, line);
+        if (chordsOnCurrentPosition.length > 1) {
+            if (direction === MoveDirection.Left) {
+                if (chord.order > 0) {
+                    swapChordOrders(chordsOnCurrentPosition, chord, direction);
+                } else {
+                    movePosition(chord, line, direction);
+                    updateOrderOnPosition(line, chord.position + 1);
+                }
+            } else {
+                if (chord.order === [...chordsOnCurrentPosition].pop().order) {
+                    movePosition(chord, line, direction);
+                    updateOrderOnPosition(line, chord.position - 1);
+                } else {
+                    swapChordOrders(chordsOnCurrentPosition, chord, direction);
+                }
+            }
         } else {
-            setNewPosition(chord, newPosition, line);
+            movePosition(chord, line, direction);
         }
     }
 
+    function swapChordOrders(chordsOnCurrentPosition: IChord[], chord: IChord, direction: MoveDirection) {
+        const newPosition = direction === MoveDirection.Left ? chord.order - 1 : chord.order + 1;
+
+        const chordToSwap = chordsOnCurrentPosition.find(c => c.order === newPosition);
+
+        chordToSwap.order = chord.order;
+        chord.order = newPosition;
+    }
+
+    function updateOrderOnPosition(line: ILine, position: number) {
+        line.chords
+            .filter(chord => chord.position === position)
+            .sort((a, b) => a.order - b.order)
+            .forEach((chord, index) => {
+                chord.order = index;
+            });
+    }
+
+    function movePosition(chord: IChord, line: ILine, direction: MoveDirection) {
+        // We need to move the position.
+        const newPosition = getNewPosition(chord.position, direction);
+
+        const chordsOnNewPosition = line.chords.filter(searchChord => searchChord.position === newPosition);
+
+        chord.order = 0;
+
+        if (chordsOnNewPosition.length) {
+            // There are other chords with the same position so update the order of the chords.
+            if (direction === MoveDirection.Left) {
+                chord.order = [...chordsOnNewPosition].pop().order + 1;
+            } else {
+                chord.order = 0;
+
+                chordsOnNewPosition.forEach(c => {
+                    c.order = c.order + 1;
+                });
+            }
+        }
+
+        setNewPosition(chord, newPosition, line);
+    }
+
     function setNewPosition(chord: IChord, newPosition: number, line: ILine) {
-        if (line.chords.length >= line.content.length) {
-            if (newPosition >= 0 && newPosition < line.chords.length) {
-                chord.position = newPosition;
-            }
-        } else {
-            if (newPosition >= 0 && newPosition <= line.content.length) {
-                chord.position = newPosition;
-            }
+        if (newPosition >= 0 && newPosition < line.displayContent.length) {
+            chord.position = newPosition;
         }
     }
 

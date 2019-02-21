@@ -70,7 +70,7 @@ export namespace JsonParser {
                 (Modifier as any)[chordJson.inversionModifier]
             );
 
-            return new Chord(chordBase, chordJson.position, chordJson.id);
+            return new Chord(chordBase, chordJson.position, chordJson.order, chordJson.id);
         });
     }
 }

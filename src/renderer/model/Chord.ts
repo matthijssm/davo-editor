@@ -4,12 +4,14 @@ import { IChord, ChordJson } from "./IChord";
 import { Modifier, Quality } from "./IMusic";
 import { IChordBase } from "./IChordBase";
 import { observable } from "mobx";
+import { Key } from "./Key";
 
 export class Chord extends ChordBase implements IChord {
     id: string;
     @observable position: number;
+    @observable order: number;
 
-    constructor(chordBase: IChordBase, position?: number, id?: string) {
+    constructor(chordBase: IChordBase, position?: number, order?: number, id?: string) {
         super(
             chordBase.base,
             chordBase.modifier,
@@ -21,6 +23,7 @@ export class Chord extends ChordBase implements IChord {
 
         this.id = id ? id : uuid.v4();
         this.position = position ? position : 0;
+        this.order = order ? order : 0;
     }
 
     updateChord(chord: ChordBase): IChord {
@@ -32,6 +35,7 @@ export class Chord extends ChordBase implements IChord {
         return {
             id: this.id,
             position: this.position,
+            order: this.order,
             base: this.base,
             modifier: Modifier[this.modifier],
             quality: Quality[this.quality],

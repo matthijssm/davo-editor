@@ -64,7 +64,7 @@ export class Line extends React.Component<LineProps> {
 
         if (line.chords.length) {
             // Sort the chords in the correct order of position.
-            const sortedChords = [...line.chords].sort((a, b) => a.position - b.position);
+            const sortedChords = [...line.chords].sort((a, b) => a.position - b.position || a.order - b.order);
 
             const chordLyricPairs = [];
 

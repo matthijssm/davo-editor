@@ -1,9 +1,9 @@
 import { IChordBase } from "./IChordBase";
-import { Modifier, Quality } from "./IMusic";
 
 export interface ChordJson {
     id: string;
     position: number;
+    order: number;
     base: number;
     modifier: string;
     quality: string;
@@ -15,5 +15,6 @@ export interface ChordJson {
 export interface IChord extends IChordBase {
     id: string;
     position: number;
+    order: number;
     toJsonObject(): ChordJson;
 }
