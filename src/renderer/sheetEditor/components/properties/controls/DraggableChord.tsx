@@ -14,6 +14,9 @@ import { Key } from "../../../../model/Key";
 import { observer } from "mobx-react";
 import { observable, action } from "mobx";
 import { AlphabetToChordBaseTranslator } from "../../../chords/AlphabetToChordBaseTranslator";
+import { MoveDirection } from "../../../chords/ChordMover";
+import { IChord } from "../../../../model/IChord";
+import { Chord } from "../../../../model/Chord";
 
 interface DraggableChordProps {
     chord: IChordBase;
@@ -27,6 +30,7 @@ interface DraggableChordProps {
     onDragEnd?: () => void;
     onDragEndWithDrop?: () => void;
     onDelete?: () => void;
+    onMove?: (chord: IChord, direction: MoveDirection) => void;
 }
 
 interface DragProps {
@@ -142,6 +146,14 @@ class DraggableChordClass extends React.Component<Props> {
         };
     };
 
+    private onMove = (direction: MoveDirection) => {
+        const { onMove, chord } = this.props;
+
+        if (chord instanceof Chord && onMove) {
+            onMove(chord, direction);
+        }
+    };
+
     private onKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
         switch (event.keyCode) {
             case 8:
@@ -149,6 +161,12 @@ class DraggableChordClass extends React.Component<Props> {
                 if (!this.isEditing) {
                     this.props.onDelete && !this.isEditing && this.props.onDelete();
                 }
+                break;
+            case 37:
+                this.onMove(MoveDirection.Left);
+                break;
+            case 39:
+                this.onMove(MoveDirection.Right);
                 break;
             case 13:
                 this.finishEditing();

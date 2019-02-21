@@ -14,6 +14,19 @@ export class ChordBase implements IChordBase {
         public inversionModifier: Modifier = Modifier.None
     ) {}
 
+    toNashvilleString(): string {
+        let nashvilleString = `${this.base}${MusicUtils.modifierToString(this.modifier)}${MusicUtils.qualityToString(
+            this.quality,
+            true
+        )}${this.adjectives}`;
+
+        if (this.inversionBase) {
+            nashvilleString += `/${this.inversionBase}${MusicUtils.modifierToString(this.inversionModifier)}`;
+        }
+
+        return nashvilleString;
+    }
+
     toAlphabethString(key: Key): string {
         const baseTranslation = ChordBaseToAlphabethTranslator.translate(this.base, this.modifier, key);
 
@@ -27,6 +40,10 @@ export class ChordBase implements IChordBase {
             );
 
             alphabethString += `/${inversionBaseTranslation}`;
+        }
+
+        if (!baseTranslation) {
+            return this.toNashvilleString();
         }
 
         return alphabethString;

@@ -22,14 +22,14 @@ export namespace MusicUtils {
         return "";
     }
 
-    export function qualityToString(quality: Quality) {
+    export function qualityToString(quality: Quality, nashville: boolean = false) {
         switch (quality) {
             case Quality.Augmented:
-                return "aug";
+                return nashville ? "+" : "aug";
             case Quality.Dimished:
-                return "dim";
+                return nashville ? "o" : "dim";
             case Quality.Minor:
-                return "m";
+                return nashville ? "-" : "m";
             case Quality.Major:
                 return "";
         }

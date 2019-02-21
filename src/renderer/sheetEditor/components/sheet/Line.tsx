@@ -9,6 +9,7 @@ import { IChordBase } from "../../../model/IChordBase";
 import { ChordLyricPair } from "./ChordLyricPair";
 import { IChord } from "../../../model/IChord";
 import { Chord } from "../../../model/Chord";
+import { MoveDirection, ChordMover } from "../../chords/ChordMover";
 
 type LineProps = {
     line: ILine;
@@ -57,7 +58,8 @@ export class Line extends React.Component<LineProps> {
             onDeleteChord: this.onDeleteChord,
             onChordDrop: this.onChordDrop,
             viewModel: viewModel,
-            showChords: line.hasChords
+            showChords: line.hasChords,
+            onChordMove: this.onChordMove
         };
 
         if (line.chords.length) {
@@ -98,6 +100,10 @@ export class Line extends React.Component<LineProps> {
         const { line } = this.props;
 
         line.removeChord(chord);
+    };
+
+    private onChordMove = (chord: IChord, direction: MoveDirection) => {
+        ChordMover.move(chord, this.props.line, direction);
     };
 
     private onChordDrop = (position: number, chord: IChordBase) => {

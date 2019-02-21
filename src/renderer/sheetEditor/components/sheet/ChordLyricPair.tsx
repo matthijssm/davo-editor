@@ -7,7 +7,7 @@ import { ChordDropzone } from "./ChordDropzone";
 import { IChordBase } from "../../../model/IChordBase";
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { DraggableChord } from "../properties/controls/DraggableChord";
-import { Chord } from "../../../model/Chord";
+import { MoveDirection } from "../../chords/ChordMover";
 
 type ChordLyricPairProps = {
     lyrics?: string;
@@ -16,6 +16,7 @@ type ChordLyricPairProps = {
     showChords: boolean;
     viewModel: SheetEditorViewModel;
     startPosition: number;
+    onChordMove?: (chord: IChord, direction: MoveDirection) => void;
     onChange?: (newValue: string) => void;
     onChordDrop?: (position: number, chord: IChordBase) => void;
     onDeleteChord?: (chord: IChord) => void;
@@ -26,7 +27,7 @@ const styles = require("./ChordLyricPair.scss");
 @observer
 export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
     render() {
-        const { chord, lyrics, baseKey, showChords, startPosition, viewModel } = this.props;
+        const { chord, lyrics, baseKey, showChords, startPosition, viewModel, onChordMove } = this.props;
 
         const isChordSelected = viewModel.selectedElement && chord && chord.id === viewModel.selectedElement.id;
 
@@ -44,6 +45,7 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
                                 onClick={this.onChordClick}
                                 onDelete={this.removeChord}
                                 isEditable={true}
+                                onMove={onChordMove}
                             />
                         )}
                     </span>
