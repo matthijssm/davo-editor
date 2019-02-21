@@ -47,7 +47,12 @@ export class ChordDropzoneClass extends React.Component<Props> {
             [styles.canDrop]: isOver && canDrop
         });
 
-        return connectDropTarget(<span className={className}>{content}</span>);
+        return (
+            <span className={className}>
+                {connectDropTarget(<div className={styles.extendedDropzone} />)}
+                {content}
+            </span>
+        );
     }
 }
 
