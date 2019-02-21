@@ -46,7 +46,6 @@ export class Line extends React.Component<LineProps> {
                         onBlur={this.onBlur}
                         value={line.content}
                         onFocus={this.onFocus}
-                        onPaste={this.onPaste}
                     />
                 )}
             </div>
