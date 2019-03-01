@@ -2,7 +2,6 @@ import { faFolder } from "@fortawesome/pro-light-svg-icons";
 import { remote } from "electron";
 import fs from "fs";
 import { observable, action, computed } from "mobx";
-import * as uuid from "uuid";
 
 import { ISheetService } from "./ISheetService";
 import { Sheet } from "../../model/Sheet";

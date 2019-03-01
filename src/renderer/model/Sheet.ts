@@ -10,6 +10,7 @@ export class Sheet implements IDocument {
     ID: string;
     @observable title: string;
     @observable subtitle: string;
+    @observable artist: string;
 
     @observable key: Key = new Key();
     @observable capo: number = 0;
@@ -40,6 +41,7 @@ export class Sheet implements IDocument {
             id: this.ID,
             title: this.title,
             subtitle: this.subtitle,
+            artist: this.artist,
             key: this.key.toJsonObject(),
             capo: this.capo,
             tempo: this.tempo,

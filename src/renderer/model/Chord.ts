@@ -1,10 +1,10 @@
-import uuid from "uuid";
+import { observable } from "mobx";
+import * as uuid from "uuid";
+
 import { ChordBase } from "./ChordBase";
 import { IChord, ChordJson } from "./IChord";
 import { Modifier, Quality } from "./IMusic";
 import { IChordBase } from "./IChordBase";
-import { observable } from "mobx";
-import { Key } from "./Key";
 
 export class Chord extends ChordBase implements IChord {
     id: string;

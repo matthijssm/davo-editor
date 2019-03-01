@@ -5,6 +5,7 @@ export interface ISheetJson {
     id: string;
     title: string;
     subtitle: string;
+    artist: string;
     key: IKeyJson;
     capo: number;
     tempo: number;
@@ -16,6 +17,7 @@ export const sheetJsonSchema = {
     id: "string",
     title: "string",
     subtitle: "string",
+    artist: "string",
     key: {
         note: "string",
         modifier: "string",

@@ -16,11 +16,11 @@ type SheetProps = {
 const styles = require("./Sheet.scss");
 
 const SortableItem = SortableElement(({ children }) => (
-    <li className={classNames("test", styles.sectionListItem)}>{children}</li>
+    <li className={classNames(styles.sectionListItem)}>{children}</li>
 ));
 
 const SortableSectionList = SortableContainer(({ children }) => {
-    return <ul className={classNames("test2", styles.sectionList)}>{children}</ul>;
+    return <ul className={classNames(styles.sectionList)}>{children}</ul>;
 }) as any;
 
 @observer
@@ -75,11 +75,16 @@ export class Sheet extends React.Component<SheetProps> {
                         onSelectElement={this.onSelectElement}
                         selectedElement={this.props.viewModel.selectedElement}
                         viewModel={this.props.viewModel}
+                        onPaste={this.onPaste}
                     />
                 </SortableItem>
             );
         });
     }
+
+    private onPaste = (content: string) => {
+        const { viewModel } = this.props;
+    };
 
     private onSelectElement = (element: IElement) => {
         const { viewModel } = this.props;

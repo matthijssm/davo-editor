@@ -8,6 +8,7 @@ export interface IDocument extends IElementContainer {
 
     title: string;
     subtitle: string;
+    artist: string;
 
     key: Key;
     capo: number;

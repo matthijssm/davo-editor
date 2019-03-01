@@ -48,6 +48,7 @@
     "@fortawesome/react-fontawesome": "^0.1.3",
     "@types/jsonschema": "^1.1.1",
     "@types/lodash": "^4.14.119",
+    "chordsheetjs": "^2.8.1",
     "classnames": "^2.2.6",
     "davojs": "../DavoJS",
     "jsonschema": "^1.2.4",

@@ -21,6 +21,7 @@ type LineProps = {
     onNewLine?: (value: string) => void;
     onRemove?: (value: string) => void;
     onFocus: (element: IElement) => void;
+    onPaste?: (content: string) => void;
 };
 
 const styles = require("./Line.scss");
@@ -46,6 +47,7 @@ export class Line extends React.Component<LineProps> {
                         onBlur={this.onBlur}
                         value={line.content}
                         onFocus={this.onFocus}
+                        onPaste={this.onPaste}
                     />
                 )}
             </div>
@@ -111,6 +113,14 @@ export class Line extends React.Component<LineProps> {
         const { line } = this.props;
 
         line.addChord(chord, position);
+    };
+
+    private onPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
+        const pasteData = event.clipboardData.getData("text/plain");
+
+        if (pasteData.match(/\n/g)) {
+            event.preventDefault();
+        }
     };
 
     private onFocus = (event: React.FocusEvent<HTMLInputElement>) => {

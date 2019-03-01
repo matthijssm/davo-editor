@@ -17,6 +17,7 @@ type SectionProps = {
     viewModel: SheetEditorViewModel;
     onDelete?: (id: string) => void;
     onSelectElement: (element: IElement) => void;
+    onPaste?: (content: string) => void;
 };
 
 const styles = require("./Section.scss");
@@ -91,6 +92,7 @@ export class Section extends React.Component<SectionProps> {
                     onArrowDown={this.onArrowDown(index)}
                     onArrowUp={this.onArrowUp(index)}
                     viewModel={this.props.viewModel}
+                    onPaste={this.props.onPaste}
                 />
             );
         });

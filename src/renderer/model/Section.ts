@@ -1,7 +1,7 @@
-import uuid from "uuid";
+import * as uuid from "uuid";
+import { observable } from "mobx";
 
 import { ISection } from "./ISection";
-import { observable } from "mobx";
 import { ILine, LineJson } from "./ILine";
 import { Line } from "./Line";
 import { IElement } from "./IElement";
@@ -17,9 +17,9 @@ export class Section implements ISection {
     @observable label: string = "";
     @observable lines: ILine[] = [];
 
-    constructor(id?: string) {
+    constructor(id?: string, createNewLine: boolean = true) {
         this.id = id ? id : uuid.v4();
-        this.lines.push(new Line());
+        createNewLine && this.lines.push(new Line());
     }
 
     get elements(): IElement[] {

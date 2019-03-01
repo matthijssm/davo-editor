@@ -77,7 +77,7 @@ export class SheetEditorViewModel implements ITabbedEditor {
     }
 
     @action
-    updateTempo(tempo: number): any {
+    updateTempo(tempo: number) {
         this.document.tempo = tempo;
     }
 
@@ -111,5 +111,9 @@ export class SheetEditorViewModel implements ITabbedEditor {
     @action
     setCaretPosition(position: number): void {
         this.caretPosition = position;
+    }
+
+    dispose(): void {
+        this.documentObserverDisposer();
     }
 }

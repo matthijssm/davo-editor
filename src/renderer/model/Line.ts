@@ -1,5 +1,5 @@
 import { observable, action, computed } from "mobx";
-import uuid from "uuid";
+import * as uuid from "uuid";
 
 import { ILine, LineType, LineJson } from "./ILine";
 import { IElement } from "./IElement";
