@@ -1,6 +1,6 @@
-import { IMetaData } from "../../model/ISheetMetaData";
 import { Directive, DirectiveType } from "./DirectiveUtils";
-import { KeyUtils } from "../../../utils/KeyUtils";
+import { IMetaData } from "../ISheetMetaData";
+import { KeyUtils } from "../../utils/KeyUtils";
 
 export namespace MetaDataUtils {
     export function generateSheetMetaData(directives: Directive[]): IMetaData {

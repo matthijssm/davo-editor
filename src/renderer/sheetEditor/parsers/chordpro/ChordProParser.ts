@@ -1,11 +1,11 @@
-import { IMetaData } from "../model/ISheetMetaData";
 import { DirectiveUtil } from "./utils/DirectiveUtils";
 import { MetaDataUtils } from "./utils/MetaDataUtils";
 import { SectionUtils } from "./utils/SectionUtils";
-import { Key } from "../../../../model/Key";
-import { IDocument } from "../../../../model/IDocument";
-import { Sheet } from "../../../../model/Sheet";
-import { ISection } from "../../../../model/ISection";
+import { Key } from "../../../model/Key";
+import { IDocument } from "../../../model/IDocument";
+import { Sheet } from "../../../model/Sheet";
+import { ISection } from "../../../model/ISection";
+import { IMetaData } from "./ISheetMetaData";
 
 export namespace ChordProParser {
     export function parseSections(text: string, key: Key): ISection[] {

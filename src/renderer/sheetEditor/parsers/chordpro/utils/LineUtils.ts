@@ -1,10 +1,10 @@
 import { DIRECTIVE_REGEX, DirectiveUtil } from "./DirectiveUtils";
-import { Chord } from "../../../../../model/Chord";
-import { Key } from "../../../../../model/Key";
-import { ILine } from "../../../../../model/ILine";
-import { Line } from "../../../../../model/Line";
-import { IChord } from "../../../../../model/IChord";
-import { AlphabetToChordBaseTranslator } from "../../../../chords/AlphabetToChordBaseTranslator";
+import { ILine } from "../../../../model/ILine";
+import { Line } from "../../../../model/Line";
+import { IChord } from "../../../../model/IChord";
+import { AlphabetToChordBaseTranslator } from "../../../chords/AlphabetToChordBaseTranslator";
+import { Chord } from "../../../../model/Chord";
+import { Key } from "../../../../model/Key";
 
 export const SECTION_DATA_REGEX = /.*:$/gm;
 export const CHORD_REGEX_GLOBAL = /\[[A-G,a-g][#,b]?[a-z,1-9]{0,4}\/?[A-G,a-g]?[#,b]?\]/g;

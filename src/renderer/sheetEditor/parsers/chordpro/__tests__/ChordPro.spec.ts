@@ -1,7 +1,7 @@
 import * as fs from "fs";
 
 import { ChordProParser } from "../ChordProParser";
-import { KeyUtils } from "../../../utils/KeyUtils";
+import { KeyUtils } from "../../utils/KeyUtils";
 
 describe("parsers.ChordPro", () => {
     describe("Good chopro file", () => {

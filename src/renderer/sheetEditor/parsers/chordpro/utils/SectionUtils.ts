@@ -1,8 +1,8 @@
 import { Directive, DirectiveType, DirectiveUtil } from "./DirectiveUtils";
 import { LineUtils } from "./LineUtils";
-import { Key } from "../../../../../model/Key";
-import { ISection } from "../../../../../model/ISection";
-import { Section } from "../../../../../model/Section";
+import { ISection } from "../../../../model/ISection";
+import { Section } from "../../../../model/Section";
+import { Key } from "../../../../model/Key";
 
 export namespace SectionUtils {
     export function getSections(document: string, key: Key): ISection[] {

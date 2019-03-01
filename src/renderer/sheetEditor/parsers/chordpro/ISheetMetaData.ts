@@ -1,4 +1,4 @@
-import { Key } from "../../../../model/Key";
+import { Key } from "../../../model/Key";
 
 export interface IMetaData {
     title: string | null;
