@@ -8,7 +8,7 @@ import { ISection } from "../../../model/ISection";
 import { IMetaData } from "./ISheetMetaData";
 
 export namespace ChordProParser {
-    export function parseSections(text: string, key: Key): ISection[] {
+    export function parsePartial(text: string, key: Key): ISection[] {
         return SectionUtils.getSections(text, key);
     }
 
@@ -26,7 +26,7 @@ export namespace ChordProParser {
             throw new Error("No key is given for this document.");
         }
 
-        sheet.sections.push(...parseSections(document, sheet.key));
+        sheet.sections.push(...parsePartial(document, sheet.key));
 
         return sheet;
     }

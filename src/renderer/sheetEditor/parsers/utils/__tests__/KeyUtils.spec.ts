@@ -35,8 +35,6 @@ describe("sheetEditor.parsers.utils.KeyUtils", () => {
     });
 
     it("should throw an error when an invalid key is given", () => {
-        expect(() => {
-            KeyUtils.fromString("HA#m");
-        }).toThrow("Key cannot be parsed");
+        expect(KeyUtils.fromString("HA#m")).toBeNull();
     });
 });

@@ -3,7 +3,7 @@ import * as fs from "fs";
 import { ChordProParser } from "../ChordProParser";
 import { KeyUtils } from "../../utils/KeyUtils";
 
-describe("parsers.ChordPro", () => {
+describe("parsers.ChordProParser", () => {
     describe("Good chopro file", () => {
         const document = fs.readFileSync(`${__dirname}/resources/The Great I Am.chopro`, "utf8");
 
