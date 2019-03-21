@@ -12,8 +12,6 @@ type FileProps = {
     onSelect: (s: IDocument) => void;
 };
 
-const styles = require("./File.scss");
-
 const FileElement = styled("div")<{ isSelected?: boolean }>`
     padding: 7px 15px;
     color: ${p => p.theme.colors.tertiaryInverted};
@@ -62,7 +60,7 @@ export class File extends React.Component<FileProps> {
                 <Icon>
                     <FontAwesomeIcon icon={faFileAlt} size="lg" />
                 </Icon>
-                <span className={styles.title}>{sheet.title}</span>
+                <span>{sheet.title}</span>
                 <Subtitle>{sheet.subtitle}</Subtitle>
             </FileElement>
         );
