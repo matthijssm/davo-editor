@@ -5,7 +5,7 @@ import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { FormField } from "./controls/FormField";
 import { ChordMapCreator } from "../../chords/ChordMapCreator";
 import { DraggableChord } from "./controls/DraggableChord";
-import { EditorState } from "../../../base";
+import { EditorState } from "shell";
 import { action } from "mobx";
 
 type SheetPaneProps = {

@@ -1,21 +1,34 @@
 import React from "react";
 import { observer } from "mobx-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilePlus, faFileImport, faUnicorn } from "@fortawesome/pro-light-svg-icons";
-import { EditorState } from "base";
-import { Bar, Group, BarTab } from "essentials";
+import { faFilePlus, faUnicorn } from "@fortawesome/pro-light-svg-icons";
+import { EditorState } from "shell";
+import { Bar, Group, BarTab, styled } from "essentials";
 
 import { FileGroup } from "./FileGroup";
 import { FileExplorerViewModel } from "../../../viewModels/FileExplorerViewModel";
 import { ISheetService } from "../../../services/sheets/ISheetService";
 import { Sheet } from "../../../model/Sheet";
 
-const styles = require("./FileExplorer.scss");
-
 type FileExplorerProps = {
     viewModel: FileExplorerViewModel;
     editorState: EditorState;
 };
+
+const FileExplorerElement = styled.div`
+    height: 100%;
+    min-width: 300px;
+    max-width: 300px;
+    background: ${p => p.theme.colors.tertiary};
+    color: ${p => p.theme.colors.tertiaryInverted};
+    user-select: none;
+    display: flex;
+    flex-direction: column;
+`;
+
+const FileServices = styled.div`
+    flex: 1;
+    overflow-y: scroll;
+`;
 
 @observer
 export class FileExplorer extends React.Component<FileExplorerProps> {
@@ -25,18 +38,18 @@ export class FileExplorer extends React.Component<FileExplorerProps> {
 
     render() {
         return (
-            <div className={styles.fileExplorer}>
+            <FileExplorerElement>
                 <Bar>
                     <Group align="left">
-                        <BarTab label="EXPLORER" selectionDisabled={true} />
+                        <BarTab label="Explorer" selectionDisabled={true} />
                     </Group>
                     <Group align="right">
                         <BarTab onClick={this.createFile} icon={faFilePlus} />
                         <BarTab onClick={this.resaveFiles} icon={faUnicorn} />
                     </Group>
                 </Bar>
-                <div className={styles.fileServices}>{this.renderFileServices()}</div>
-            </div>
+                <FileServices>{this.renderFileServices()}</FileServices>
+            </FileExplorerElement>
         );
     }
 

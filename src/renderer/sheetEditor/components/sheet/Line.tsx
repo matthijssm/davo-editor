@@ -9,7 +9,7 @@ import { IChordBase } from "../../../model/IChordBase";
 import { ChordLyricPair } from "./ChordLyricPair";
 import { IChord } from "../../../model/IChord";
 import { MoveDirection, ChordMover } from "../../chords/ChordMover";
-import { EditorState } from "../../../base";
+import { EditorState } from "shell";
 
 type LineProps = {
     line: ILine;

@@ -1,20 +1,46 @@
 import React from "react";
 import { observer } from "mobx-react";
-import classNames from "classnames";
-import { EditorState } from "base";
+import { EditorState } from "shell";
 import ReactDOM from "react-dom";
 import { faThList, faCogs } from "@fortawesome/pro-light-svg-icons";
 
-import { WindowButtons } from "./window/WindowButtons";
 import { TopBarTab } from "./TopBarTab";
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { ITabbedEditor } from "../../../controls/ITabbedEditor";
+import styled from "styled-components";
 
 type TopBarProps = {
     editorState: EditorState;
 };
 
-const styles = require("./TopBar.scss");
+const StyledTopBar = styled.div`
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding-left: 80px;
+
+    font-size: ${props => props.theme.font.fontSizeSmall};
+    background: ${props => props.theme.colors.primary};
+    -webkit-app-region: drag;
+    -webkit-user-select: none;
+`;
+
+const ScrollableTabsContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent; /* make scrollbar transparent */
+        height: 0px;
+    }
+`;
 
 @observer
 export class TopBar extends React.Component<TopBarProps> {
@@ -29,16 +55,14 @@ export class TopBar extends React.Component<TopBarProps> {
 
     render() {
         return (
-            <div className={classNames(styles.topBar)}>
-                <WindowButtons window={this.props.editorState.browserWindow} />
-
+            <StyledTopBar>
                 <TopBarTab active={true} icon={faThList} />
-                <TopBarTab active={false} icon={faCogs} />
+                {/* <TopBarTab active={false} icon={faCogs} /> */}
 
-                <div className={styles.horizontalScrollable} ref={this.horizontalScrollElement}>
+                <ScrollableTabsContainer ref={this.horizontalScrollElement}>
                     {this.renderOpenTabs()}
-                </div>
-            </div>
+                </ScrollableTabsContainer>
+            </StyledTopBar>
         );
     }
 

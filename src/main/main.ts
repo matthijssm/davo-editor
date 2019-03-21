@@ -12,8 +12,8 @@ function createWindow() {
         width: 906,
         minWidth: 906,
         minHeight: 600,
-        frame: false,
-        title: "Davo Editor"
+        title: "Davo Editor",
+        titleBarStyle: "hiddenInset"
     });
 
     const menu = Menu.buildFromTemplate([

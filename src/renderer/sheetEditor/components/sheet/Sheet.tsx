@@ -3,11 +3,13 @@ import { Button } from "essentials";
 import { observer, Provider } from "mobx-react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import classNames from "classnames";
+import Modal from "react-modal";
 
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { ISection } from "../../../model/ISection";
 import { Section } from "./Section";
 import { IElement } from "../../../model/IElement";
+import { ImportDialog } from "../modals/ImportDialog";
 
 type SheetProps = {
     viewModel: SheetEditorViewModel;
@@ -44,6 +46,7 @@ export class Sheet extends React.Component<SheetProps> {
                         {this.renderSections(document.sections)}
                     </SortableSectionList>
                     <Button value="Add a new section" fullWidth={true} onClick={this.addSection} />
+                    {/* <ImportDialog /> */}
                 </div>
             </Provider>
         );

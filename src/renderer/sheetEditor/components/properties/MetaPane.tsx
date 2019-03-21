@@ -21,23 +21,11 @@ export class MetaPane extends React.Component<MetaPaneProps> {
 
         return (
             <>
-                <KeySelectField activeKey={key} onChange={this.updateKey} />
+                <KeySelectField activeKey={key} onChange={this.updateKey} label="Key" />
 
-                <NumberSelectField
-                    label="Capo"
-                    value={capo}
-                    onChange={this.updateCapo}
-                    max={12}
-                    min={0}
-                />
+                <NumberSelectField label="Capo" value={capo} onChange={this.updateCapo} max={12} min={0} />
 
-                <NumberSelectField
-                    label="Tempo"
-                    value={tempo}
-                    onChange={this.updateTempo}
-                    max={500}
-                    min={0}
-                />
+                <NumberSelectField label="Tempo" value={tempo} onChange={this.updateTempo} max={500} min={0} />
             </>
         );
     }

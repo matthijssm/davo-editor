@@ -8,6 +8,7 @@ import { faCaretCircleDown, faCaretDown } from "@fortawesome/pro-regular-svg-ico
 import { File } from "./File";
 import { IDocument } from "../../../model/IDocument";
 import { Sheet } from "../../../model/Sheet";
+import { styled, css } from "essentials";
 
 type FileGroupProps = {
     title: string;
@@ -19,30 +20,49 @@ type FileGroupProps = {
     onSheetSelected: (s: IDocument) => void;
 };
 
-const styles = require("./FileGroup.scss");
+const FileGroupElement = styled("div")<{ isActive?: boolean }>`
+    width: 100%;
+    padding: 10px 15px;
+    box-sizing: border-box;
+    border-bottom: 1px solid ${p => p.theme.colors.tertiaryHighlight};
+    color: ${p => p.theme.colors.tertiaryInverted};
+    font-size: ${p => p.theme.font.fontSizeBody};
+
+    ${p =>
+        p.isActive &&
+        css`
+            background: ${p.theme.colors.attention};
+            color: ${p.theme.colors.attentionInverted};
+            border-bottom: 0;
+        `};
+`;
+
+const Icon = styled.span`
+    margin-right: 10px;
+`;
+
+const Caret = styled.span`
+    float: right;
+`;
 
 @observer
 export class FileGroup extends React.Component<FileGroupProps> {
     render() {
         const { title, active, icon } = this.props;
 
-        const style = classNames(styles.fileGroupHeader, {
-            [styles.isActive]: active
-        });
-
         return (
-            <div className={styles}>
-                <div className={style} onClick={this.props.onClick}>
-                    <span className={styles.icon}>
+            <>
+                <FileGroupElement isActive={active} onClick={this.props.onClick}>
+                    <Icon>
                         <FontAwesomeIcon icon={icon} />
-                    </span>
-                    <span className={styles.title}>{title}</span>
-                    <span className={styles.caret}>
+                    </Icon>
+                    <span>{title}</span>
+                    <Caret>
                         <FontAwesomeIcon icon={active ? faCaretDown : faCaretLeft} />
-                    </span>
-                </div>
-                <div className={styles.fileGroupFiles}>{active && this.renderFiles()}</div>
-            </div>
+                    </Caret>
+                </FileGroupElement>
+                {active && this.renderFiles()}
+            </>
         );
     }
 
@@ -50,14 +70,7 @@ export class FileGroup extends React.Component<FileGroupProps> {
         const files = this.props.files;
 
         return files.map(file => {
-            return (
-                <File
-                    sheet={file}
-                    key={file.ID}
-                    onSelect={this.onSelect}
-                    isSelected={this.props.selectedSheet ? this.props.selectedSheet.ID === file.ID : false}
-                />
-            );
+            return <File sheet={file} key={file.ID} onSelect={this.onSelect} isSelected={this.props.selectedSheet ? this.props.selectedSheet.ID === file.ID : false} />;
         });
     }
 

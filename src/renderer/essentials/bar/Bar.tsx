@@ -1,30 +1,43 @@
-import React from "react";
-import classNames from "classnames";
+import { styled, css } from "../styled-components";
 
-type HeaderBarProps = {};
+export const Bar = styled.div`
+    width: 100%;
+    height: 40px;
 
-const styles = require("./Bar.scss");
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    box-sizing: border-box;
 
-export class Bar extends React.Component<HeaderBarProps> {
-    render() {
-        return <div className={styles.headerBar}>{this.props.children}</div>;
-    }
-}
+    background: ${p => p.theme.colors.secondary};
+    -webkit-user-select: none;
+
+    color: $header-bar-color;
+`;
 
 type GroupProps = {
-    align?: string;
+    align: string;
 };
 
-export class Group extends React.Component<GroupProps> {
-    render() {
-        const { align, children } = this.props;
+export const Group = styled("div")`
+    display: flex;
+    flex-direction: row;
 
-        const style = classNames(styles.headerBarGroup, {
-            [styles.isLeft]: align === "left",
-            [styles.isCenter]: align === "center",
-            [styles.sRight]: align === "right"
-        });
+    ${(p: GroupProps) =>
+        p.align === "left" &&
+        css`
+            margin-right: auto;
+        `};
 
-        return <div className={style}>{children}</div>;
-    }
-}
+    ${(p: GroupProps) =>
+        p.align === "center" &&
+        css`
+            margin: 0 auto;
+        `};
+
+    ${(p: GroupProps) =>
+        p.align === "right" &&
+        css`
+            margin-left: auto;
+        `};
+`;

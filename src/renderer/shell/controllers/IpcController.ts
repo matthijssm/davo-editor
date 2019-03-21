@@ -1,4 +1,4 @@
-import { EditorState } from "base";
+import { EditorState } from "shell";
 import { ipcRenderer, remote } from "electron";
 
 export class IpcController {

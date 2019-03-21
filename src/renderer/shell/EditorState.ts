@@ -1,14 +1,12 @@
-import "reflect-metadata";
-
 import { remote, BrowserWindow } from "electron";
 import { observable, action } from "mobx";
 
-import { FileExplorerController } from "../controllers/FileExplorerController";
+import { FileExplorerController } from "./controllers/FileExplorerController";
 import { IDocument } from "../model/IDocument";
 import { ITabbedEditor } from "../controls/ITabbedEditor";
 import { Sheet } from "../model/Sheet";
 import { SheetEditorViewModel } from "../viewModels/SheetEditorViewModel";
-import { IpcController } from "../controllers/IpcController";
+import { IpcController } from "./controllers/IpcController";
 
 export class EditorState {
     @observable

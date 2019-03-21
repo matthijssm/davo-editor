@@ -7,16 +7,17 @@ import { Note, Modifier, Mode } from "../../../../model/IMusic";
 
 type KeySelectFieldProps = {
     activeKey: Key;
+    label?: string;
     onChange: (key: Key) => void;
 };
 
 @observer
 export class KeySelectField extends React.Component<KeySelectFieldProps> {
     render() {
-        const { activeKey } = this.props;
+        const { activeKey, label } = this.props;
         return (
             <>
-                <FormField label="Key">
+                <FormField label={label}>
                     <RadioButtonGroup onChange={this.onNoteChange} currentValue={Note[activeKey.note]}>
                         <InsideLabelRadioButton caption="A" value="A" />
                         <InsideLabelRadioButton caption="B" value="B" />

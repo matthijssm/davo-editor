@@ -8,7 +8,7 @@ import { IChordBase } from "../../../model/IChordBase";
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { DraggableChord } from "../properties/controls/DraggableChord";
 import { MoveDirection } from "../../chords/ChordMover";
-import { EditorState } from "../../../base";
+import { EditorState } from "shell";
 
 type ChordLyricPairProps = {
     lyrics?: string;

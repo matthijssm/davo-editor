@@ -1,14 +1,11 @@
 import { ITabbedEditor } from "../controls/ITabbedEditor";
 import { Sheet } from "../model/Sheet";
-import { IDocument } from "../model/IDocument";
 import { observable, IReactionDisposer, reaction, computed, action } from "mobx";
 import { ISheetService } from "../services/sheets/ISheetService";
 import { isEmpty } from "lodash";
 import { Key } from "../model/Key";
 import { Section } from "../model/Section";
 import { IElement } from "../model/IElement";
-import { IChordBase } from "../model/IChordBase";
-import { ILine } from "../model/ILine";
 
 export type PropertiesPaneTabs = "Sheet" | "Meta";
 

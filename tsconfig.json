@@ -13,8 +13,8 @@
         "paths": {
             "essentials": ["essentials"],
             "essentials/*": ["essentials/*"],
-            "base": ["base"],
-            "base/*": ["base/*"]
+            "shell": ["shell"],
+            "shell/*": ["shell/*"]
         },
         "emitDecoratorMetadata": true
     },

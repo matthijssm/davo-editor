@@ -2,6 +2,8 @@ import * as React from "react";
 import classNames from "classnames";
 import { observable, action } from "mobx";
 import { observer } from "mobx-react";
+import { BarTabElement } from "./BarTab";
+import { styled } from "../styled-components";
 
 type EditableBarTabProps = {
     value: string;
@@ -11,7 +13,16 @@ type EditableBarTabProps = {
     autofocus?: boolean;
 };
 
-const styles = require("./BarTab.scss");
+const Input = styled.input`
+    background: ${p => p.theme.colors.secondary};
+    border: none;
+    color: ${p => p.theme.colors.secondaryInverted};
+    font-size: ${p => p.theme.font.fontSizeBody};
+
+    outline: none;
+    width: 100%;
+    text-align: center;
+`;
 
 const MIN_SIZE = 10;
 const MAX_SIZE = 30;
@@ -33,17 +44,9 @@ export class EditableBarTab extends React.Component<EditableBarTabProps> {
         const { value, onBlur, placeholder } = this.props;
 
         return (
-            <div className={classNames(styles.headerBarTab, styles.isEditable)}>
-                <input
-                    value={value}
-                    onChange={this.onChange}
-                    onBlur={onBlur}
-                    className={styles.headerBarTabInput}
-                    placeholder={placeholder}
-                    ref={this.inputElement}
-                    size={this.inputSize}
-                />
-            </div>
+            <BarTabElement selectionDisabled={true} isEditable={true}>
+                <Input value={value} onChange={this.onChange} onBlur={onBlur} placeholder={placeholder} ref={this.inputElement} size={this.inputSize} />
+            </BarTabElement>
         );
     }
 

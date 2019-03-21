@@ -17,7 +17,7 @@ let mainConfig = {
         extensions: [".js", ".json", ".ts"],
         alias: {
             essentials: __dirname + "/../src/renderer/essentials",
-            base: __dirname + "/../src/renderer/base"
+            shell: __dirname + "/../src/renderer/shell"
         }
     },
     module: {
