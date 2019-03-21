@@ -50,7 +50,7 @@ const colors: any = {
 
     // Base colors
     base: hardColors.white,
-    baseHighlight: hardColors.grey3,
+    baseHighlight: darken(0.1, hardColors.grey3),
     baseInverted: hardColors.grey1
 };
 

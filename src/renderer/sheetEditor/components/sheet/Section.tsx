@@ -2,6 +2,7 @@ import * as React from "react";
 import { observer, inject } from "mobx-react";
 import { SortableHandle } from "react-sortable-hoc";
 import { faTimes, faSort } from "@fortawesome/pro-light-svg-icons";
+import { styled } from "essentials";
 
 import { ISection } from "../../../model/ISection";
 import { SectionOptions } from "./SectionOptions";
@@ -20,11 +21,32 @@ type SectionProps = {
     onPaste?: (content: string) => void;
 };
 
-const styles = require("./Section.scss");
-
 const placeholder = "label";
 
 const DragHandle = SortableHandle(() => <SectionOptionButton icon={faSort} />);
+
+const SectionElement = styled.div`
+    width: 100%;
+    border: 1px solid ${p => p.theme.colors.baseHighlight};
+    padding: 15px;
+    border-radius: 5px;
+    background: ${p => p.theme.colors.base};
+
+    position: relative;
+    overflow: none;
+`;
+
+const Label = styled.input`
+    position: absolute;
+    top: -8px;
+
+    font-size: ${p => p.theme.font.fontSizeBody};
+    font-weight: bold;
+    border: none;
+    outline: none;
+    padding: 0 5px;
+    width: auto;
+`;
 
 @observer
 export class Section extends React.Component<SectionProps> {
@@ -34,24 +56,15 @@ export class Section extends React.Component<SectionProps> {
         const { section } = this.props;
 
         return (
-            <div className={styles.section}>
-                <div className={styles.label}>
-                    <input
-                        type="text"
-                        className={styles.labelInput}
-                        value={section.label}
-                        onChange={this.onLabelChange}
-                        ref={this.labelInput}
-                        placeholder={placeholder}
-                    />
-                </div>
+            <SectionElement>
+                <Label type="text" value={section.label} onChange={this.onLabelChange} ref={this.labelInput} placeholder={placeholder} />
                 <SectionOptions>
                     <DragHandle />
                     <SectionOptionButton icon={faTimes} onClick={this.onDeleteSection} />
                 </SectionOptions>
 
                 {this.renderLines(section.lines)}
-            </div>
+            </SectionElement>
         );
     }
 

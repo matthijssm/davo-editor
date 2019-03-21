@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button } from "essentials";
+import { Button, styled } from "essentials";
 import { observer, Provider } from "mobx-react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import classNames from "classnames";
@@ -15,14 +15,24 @@ type SheetProps = {
     viewModel: SheetEditorViewModel;
 };
 
-const styles = require("./Sheet.scss");
+const SheetElement = styled.div`
+    width: 100%;
+`;
 
-const SortableItem = SortableElement(({ children }) => (
-    <li className={classNames(styles.sectionListItem)}>{children}</li>
-));
+const SectionList = styled.ul`
+    padding: 0;
+    list-style: none;
+`;
+
+const SectionListItem = styled.li`
+    list-style: none;
+    margin-bottom: 22px;
+`;
+
+const SortableItem = SortableElement(({ children }) => <SectionListItem>{children}</SectionListItem>);
 
 const SortableSectionList = SortableContainer(({ children }) => {
-    return <ul className={classNames(styles.sectionList)}>{children}</ul>;
+    return <SectionList>{children}</SectionList>;
 }) as any;
 
 @observer
@@ -34,20 +44,13 @@ export class Sheet extends React.Component<SheetProps> {
 
         return (
             <Provider viewModel={viewModel}>
-                <div className={styles.sheet}>
-                    <SortableSectionList
-                        items={document.sections}
-                        onSortEnd={this.onSortEnd}
-                        useDragHandle={true}
-                        lockAxis="y"
-                        lockToContainerEdges={true}
-                        helperClass={styles.sectionList}
-                    >
+                <SheetElement>
+                    <SortableSectionList items={document.sections} onSortEnd={this.onSortEnd} useDragHandle={true} lockAxis="y" lockToContainerEdges={true}>
                         {this.renderSections(document.sections)}
                     </SortableSectionList>
                     <Button value="Add a new section" fullWidth={true} onClick={this.addSection} />
                     {/* <ImportDialog /> */}
-                </div>
+                </SheetElement>
             </Provider>
         );
     }
@@ -86,7 +89,7 @@ export class Sheet extends React.Component<SheetProps> {
     }
 
     private onPaste = (content: string) => {
-        const { viewModel } = this.props;
+        // const { viewModel } = this.props;
     };
 
     private onSelectElement = (element: IElement) => {

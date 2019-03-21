@@ -1,6 +1,7 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
-import classNames from "classnames";
+import { EditorState } from "shell";
+import { styled } from "essentials";
 
 import { ILine } from "../../../model/ILine";
 import { IElement } from "../../../model/IElement";
@@ -9,7 +10,6 @@ import { IChordBase } from "../../../model/IChordBase";
 import { ChordLyricPair } from "./ChordLyricPair";
 import { IChord } from "../../../model/IChord";
 import { MoveDirection, ChordMover } from "../../chords/ChordMover";
-import { EditorState } from "shell";
 
 type LineProps = {
     line: ILine;
@@ -24,7 +24,29 @@ type LineProps = {
     onPaste?: (content: string) => void;
 };
 
-const styles = require("./Line.scss");
+const LineElement = styled.div`
+    padding: 1px 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+    font-size: ${p => p.theme.font.fontSizeBody};
+    color: black;
+    position: relative;
+    text-rendering: optimizeLegibility;
+`;
+
+const LineInput = styled.input`
+    border: 0;
+    width: 100%;
+    padding: 5px 2px;
+    outline: none;
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    font-size: ${p => p.theme.font.fontSizeBody};
+    color: black;
+    text-rendering: optimizeLegibility;
+`;
 
 @inject("editorState")
 @observer
@@ -35,13 +57,12 @@ export class Line extends React.Component<LineProps> {
         const { line, editorState } = this.props;
 
         return (
-            <div className={styles.line}>
+            <LineElement>
                 {this.renderChordLyricsPairs()}
                 {!editorState.isDragging && (
-                    <input
+                    <LineInput
                         type="text"
                         ref={this.contentField}
-                        className={styles.lineInput}
                         onKeyDown={this.onKeyDown}
                         onChange={this.onChange}
                         onBlur={this.onBlur}
@@ -50,7 +71,7 @@ export class Line extends React.Component<LineProps> {
                         onPaste={this.onPaste}
                     />
                 )}
-            </div>
+            </LineElement>
         );
     }
 
@@ -81,16 +102,7 @@ export class Line extends React.Component<LineProps> {
                 const nextPosition = chords[index + 1] ? chords[index + 1].position : line.displayContent.length;
                 const lyrics = line.displayContent.substring(chord.position, nextPosition);
 
-                chordLyricPairs.push(
-                    <ChordLyricPair
-                        key={chord.id}
-                        chord={chord}
-                        baseKey={viewModel.key}
-                        lyrics={lyrics}
-                        startPosition={chord.position}
-                        {...pairProps}
-                    />
-                );
+                chordLyricPairs.push(<ChordLyricPair key={chord.id} chord={chord} baseKey={viewModel.key} lyrics={lyrics} startPosition={chord.position} {...pairProps} />);
             });
 
             return chordLyricPairs;

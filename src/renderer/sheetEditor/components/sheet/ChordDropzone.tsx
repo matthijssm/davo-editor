@@ -1,6 +1,7 @@
 import * as React from "react";
 import { DropTarget, ConnectDropTarget, DropTargetMonitor, DropTargetSpec, DropTargetCollector } from "react-dnd";
 import classNames from "classnames";
+import { styled, css } from "essentials";
 
 import { IChordBase } from "../../../model/IChordBase";
 import { IChord } from "../../../model/IChord";
@@ -36,22 +37,38 @@ const dropTargetCollector: DropTargetCollector<DropTargetProps> = (connect, moni
     canDrop: monitor.canDrop()
 });
 
-const styles = require("./ChordDropzone.scss");
-
 type Props = ChordDropperProps & DropTargetProps;
+
+const Dropzone = styled("span")<DropTargetProps>`
+    box-sizing: border-box;
+    white-space: pre;
+    position: relative;
+
+    ${p =>
+        p.canDrop &&
+        css`
+            background: ${p.theme.colors.attention};
+        `}
+`;
+
+const ExtendDropzone = styled.div`
+    width: 100%;
+    height: 36px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+`;
 
 export class ChordDropzoneClass extends React.Component<Props> {
     render() {
         const { content, isOver, canDrop, connectDropTarget, fullHeight } = this.props;
 
-        const className = classNames(styles.dropzone, {
-            [styles.canDrop]: isOver && canDrop
-        });
-
         return connectDropTarget(
-            <span className={className}>
-                {fullHeight && <div className={styles.extendedDropzone} />}
-                {content}
+            <span>
+                <Dropzone canDrop={isOver && canDrop}>
+                    {fullHeight && <ExtendDropzone />}
+                    {content}
+                </Dropzone>
             </span>
         );
     }

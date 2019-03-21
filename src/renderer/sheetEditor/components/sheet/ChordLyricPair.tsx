@@ -1,5 +1,6 @@
 import * as React from "react";
 import { observer, inject } from "mobx-react";
+import { styled } from "essentials";
 
 import { IChord } from "../../../model/IChord";
 import { Key } from "../../../model/Key";
@@ -24,7 +25,20 @@ type ChordLyricPairProps = {
     onDeleteChord?: (chord: IChord) => void;
 };
 
-const styles = require("./ChordLyricPair.scss");
+const Pair = styled.span`
+    display: flex;
+    flex-direction: column;
+`;
+
+const Chord = styled.span`
+    height: 18px;
+    margin-right: 2px;
+    user-select: none;
+`;
+
+const Lyric = styled.span`
+    height: 18px;
+`;
 
 @inject("editorState")
 @observer
@@ -35,9 +49,9 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
         const isChordSelected = viewModel.selectedElement && chord && chord.id === viewModel.selectedElement.id;
 
         return (
-            <span className={styles.pair}>
+            <Pair>
                 {showChords && (
-                    <span className={styles.chord}>
+                    <Chord>
                         {chord && baseKey && (
                             <DraggableChord
                                 isInline={true}
@@ -53,10 +67,10 @@ export class ChordLyricPair extends React.Component<ChordLyricPairProps> {
                                 onMove={onChordMove}
                             />
                         )}
-                    </span>
+                    </Chord>
                 )}
-                <span className={styles.lyric}>{this.renderDropzones(lyrics, startPosition)}</span>
-            </span>
+                <Lyric>{this.renderDropzones(lyrics, startPosition)}</Lyric>
+            </Pair>
         );
     }
 

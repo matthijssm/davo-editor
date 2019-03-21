@@ -1,11 +1,10 @@
-import * as React from "react";
+import { styled } from "essentials";
 
-type SectionOptionsProps = {};
-
-const styles = require("./Section.scss");
-
-export class SectionOptions extends React.Component<SectionOptionsProps> {
-    render() {
-        return <div className={styles.options}>{this.props.children}</div>;
-    }
-}
+export const SectionOptions = styled.div`
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: flex;
+    user-select: none;
+    z-index: 10;
+`;
