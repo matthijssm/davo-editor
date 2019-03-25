@@ -19,7 +19,7 @@ export class SheetEditorViewModel implements ITabbedEditor {
     document: Sheet;
 
     @observable
-    openPropertiesPane: PropertiesPaneTabs = "Sheet";
+    openPropertiesPane: PropertiesPaneTabs = "Meta";
 
     @observable selectedElement: IElement | null = null;
 

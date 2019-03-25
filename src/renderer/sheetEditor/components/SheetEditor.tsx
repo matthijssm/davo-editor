@@ -1,8 +1,7 @@
 import React, { ChangeEvent } from "react";
 import { observer } from "mobx-react";
-import { faFilePlus, faFileImport } from "@fortawesome/pro-light-svg-icons";
 import { action } from "mobx";
-import { Bar, EditableBarTab, BarTab, Group, RadioButtonGroup, InsideLabelRadioButton, styled } from "essentials";
+import { Bar, EditableBarTab, Group, styled } from "essentials";
 
 import { PropertiesPane } from "./properties/PropertiesPane";
 import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";

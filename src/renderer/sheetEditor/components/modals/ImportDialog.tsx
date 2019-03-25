@@ -21,8 +21,8 @@ export class ImportDialog extends React.Component<ImportDialogProps> {
                     <KeySelectField activeKey={KeyUtils.fromString("C#m")} onChange={this.onChange} />
                 </div>
                 <div className={styles.dialogFooter}>
-                    <Button value="Save" />
-                    <Button value="Cancel" />
+                    <Button>Save</Button>
+                    <Button>Cancel</Button>
                 </div>
             </Modal>
         );

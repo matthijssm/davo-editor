@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Key } from "../../../../model/Key";
 import { FormField } from "./FormField";
-import { RadioButtonGroup, InsideLabelRadioButton } from "essentials";
+import { RadioButtonGroup, Button } from "essentials";
 import { observer } from "mobx-react";
 import { Note, Modifier, Mode } from "../../../../model/IMusic";
 
@@ -19,26 +19,26 @@ export class KeySelectField extends React.Component<KeySelectFieldProps> {
             <>
                 <FormField label={label}>
                     <RadioButtonGroup onChange={this.onNoteChange} currentValue={Note[activeKey.note]}>
-                        <InsideLabelRadioButton caption="A" value="A" />
-                        <InsideLabelRadioButton caption="B" value="B" />
-                        <InsideLabelRadioButton caption="C" value="C" />
-                        <InsideLabelRadioButton caption="D" value="D" />
-                        <InsideLabelRadioButton caption="E" value="E" />
-                        <InsideLabelRadioButton caption="F" value="F" />
-                        <InsideLabelRadioButton caption="G" value="G" />
+                        <Button value="A">A</Button>
+                        <Button value="B">B</Button>
+                        <Button value="C">C</Button>
+                        <Button value="D">D</Button>
+                        <Button value="E">E</Button>
+                        <Button value="F">F</Button>
+                        <Button value="G">G</Button>
                     </RadioButtonGroup>
                 </FormField>
                 <FormField>
                     <RadioButtonGroup onChange={this.onModifierChange} currentValue={Modifier[activeKey.modifier]}>
-                        <InsideLabelRadioButton caption="#" value="Sharp" />
-                        <InsideLabelRadioButton caption="b" value="Flat" />
-                        <InsideLabelRadioButton caption="None" value="None" />
+                        <Button value="Sharp">#</Button>
+                        <Button value="Flat">b</Button>
+                        <Button value="None">None</Button>
                     </RadioButtonGroup>
                 </FormField>
                 <FormField>
                     <RadioButtonGroup onChange={this.onModeChange} currentValue={Mode[activeKey.mode]}>
-                        <InsideLabelRadioButton caption="Major" value="Major" />
-                        <InsideLabelRadioButton caption="Minor" value="Minor" />
+                        <Button value="Major">Major</Button>
+                        <Button value="Minor">Minor</Button>
                     </RadioButtonGroup>
                 </FormField>
             </>

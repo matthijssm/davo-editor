@@ -51,7 +51,8 @@ const colors: any = {
     // Base colors
     base: hardColors.white,
     baseHighlight: darken(0.1, hardColors.grey3),
-    baseInverted: hardColors.grey1
+    baseInverted: hardColors.grey1,
+    baseFaded: lighten(0.1, hardColors.grey1)
 };
 
 const fonts = {

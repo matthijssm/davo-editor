@@ -2,7 +2,7 @@ import * as React from "react";
 import { FormField } from "./FormField";
 import { observable, action } from "mobx";
 import { observer } from "mobx-react";
-import { Input, FormGroup, Button } from "essentials";
+import { Input, ControlGroup, Button } from "essentials";
 
 type NumberSelectFieldProps = {
     min?: number;
@@ -11,8 +11,6 @@ type NumberSelectFieldProps = {
     onChange?: (val: number) => void;
     label?: string;
 };
-
-const styles = require("./NumberSelectField.scss");
 
 @observer
 export class NumberSelectField extends React.Component<NumberSelectFieldProps> {
@@ -32,19 +30,15 @@ export class NumberSelectField extends React.Component<NumberSelectFieldProps> {
         const { value, label } = this.props;
         return (
             <FormField label={label}>
-                <div className={styles.numberSelect}>
-                    <FormGroup>
-                        <Button value="-" onClick={this.minusOne} fullWidth={true} />
-                        <Input
-                            type="text"
-                            value={this.isEditing ? this._value : value.toString()}
-                            onChange={this.onChange}
-                            onBlur={this.onBlur}
-                            onFocus={this.onFocus}
-                        />
-                        <Button value="+" onClick={this.plusOne} fullWidth={true} />
-                    </FormGroup>
-                </div>
+                <ControlGroup>
+                    <Button onClick={this.minusOne} fullWidth={true}>
+                        -
+                    </Button>
+                    <Input type="text" value={this.isEditing ? this._value : value.toString()} onChange={this.onChange} onBlur={this.onBlur} onFocus={this.onFocus} />
+                    <Button onClick={this.plusOne} fullWidth={true}>
+                        +
+                    </Button>
+                </ControlGroup>
             </FormField>
         );
     }

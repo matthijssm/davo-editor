@@ -48,7 +48,9 @@ export class Sheet extends React.Component<SheetProps> {
                     <SortableSectionList items={document.sections} onSortEnd={this.onSortEnd} useDragHandle={true} lockAxis="y" lockToContainerEdges={true}>
                         {this.renderSections(document.sections)}
                     </SortableSectionList>
-                    <Button value="Add a new section" fullWidth={true} onClick={this.addSection} />
+                    <Button fullWidth={true} onClick={this.addSection}>
+                        Add a new section
+                    </Button>
                     {/* <ImportDialog /> */}
                 </SheetElement>
             </Provider>

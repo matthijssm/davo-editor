@@ -1,26 +1,46 @@
-import * as React from "react";
-import classNames from "classnames";
+import { styled, css } from "../styled-components";
 
-type ButtonProps = {
+export type ButtonProps = {
+    fullWidth?: boolean;
+    active?: boolean;
     value?: string;
     onClick?: () => void;
-    fullWidth?: boolean;
 };
 
-const styles = require("./Button.scss");
+export const Button = styled("button")<ButtonProps>`
+    all: unset;
 
-export class Button extends React.Component<ButtonProps> {
-    render() {
-        const { value, onClick, fullWidth } = this.props;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    padding: 9px;
+    border: 1px solid ${p => p.theme.colors.baseHighlight};
+    box-sizing: border-box;
+    font-weight: bold;
+    border-radius: 3px;
+    font-size: ${p => p.theme.font.fontSizeSmall};
 
-        const className = classNames(styles.button, {
-            [styles.isFullWidth]: fullWidth
-        });
+    ${p =>
+        p.fullWidth &&
+        css`
+            width: 100%;
+            text-align: center;
+        `}
 
-        return (
-            <button onClick={onClick} className={className}>
-                {value}
-            </button>
-        );
+    &:hover {
+        border-color: ${p => p.theme.colors.attention};
     }
-}
+
+    &:active {
+        color: ${p => p.theme.colors.attention};
+    }
+
+    ${p =>
+        p.active &&
+        css`
+            color: ${p.theme.colors.attention};
+            border-color: ${p.theme.colors.attention} !important;
+
+            & + button {
+                border-left: 1px solid ${p.theme.colors.attention};
+            }
+        `}
+`;

@@ -1,17 +1,23 @@
-import * as React from "react";
+import { styled } from "../styled-components";
 
-type InputProps = {
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    onFocus?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    onBlur?: (e: React.FocusEvent<HTMLInputElement>) => void;
-    value?: string;
-    type?: string;
-};
+export const Input = styled.input`
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 
-const styles = require("./Input.scss");
+    display: block;
+    background-color: ${p => p.theme.colors.base};
+    width: 100%;
+    padding: 9px;
+    border: 1px solid ${p => p.theme.colors.baseHighlight};
+    border-radius: $border-radius;
+    font-size: ${p => p.theme.font.fontSizeSmall};
+    outline: none;
 
-export class Input extends React.Component<InputProps> {
-    render() {
-        return <input {...this.props} className={styles.input} />;
+    &:hover {
+        border-color: ${p => p.theme.colors.attention};
+        box-shadow: 0 0 7px 0 rgba(0, 0, 0, 0.08);
     }
-}
+
+    &:focus {
+        border-color: ${p => p.theme.colors.attention};
+    }
+`;

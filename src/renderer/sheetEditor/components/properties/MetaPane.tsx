@@ -1,5 +1,4 @@
 import * as React from "react";
-import { InputControlField } from "./controls/InputControlField";
 import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
 import { KeySelectField } from "./controls/KeySelectField";
 import { Key } from "../../../model/Key";
