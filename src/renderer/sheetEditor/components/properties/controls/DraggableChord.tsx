@@ -1,13 +1,6 @@
 import * as React from "react";
-import classNames from "classnames";
-import {
-    ConnectDragSource,
-    DragSourceConnector,
-    DragSourceMonitor,
-    DragSourceSpec,
-    DragSourceCollector,
-    DragSource
-} from "react-dnd";
+import { ConnectDragSource, DragSourceConnector, DragSourceMonitor, DragSourceSpec, DragSourceCollector, DragSource } from "react-dnd";
+import { styled, css } from "essentials";
 
 import { IChordBase } from "../../../../model/IChordBase";
 import { Key } from "../../../../model/Key";
@@ -16,7 +9,7 @@ import { observable, action } from "mobx";
 import { AlphabetToChordBaseTranslator } from "../../../chords/AlphabetToChordBaseTranslator";
 import { MoveDirection } from "../../../chords/ChordMover";
 import { IChord } from "../../../../model/IChord";
-import { Chord } from "../../../../model/Chord";
+import { Chord as ChordModel } from "../../../../model/Chord";
 
 interface DraggableChordProps {
     chord: IChordBase;
@@ -66,17 +59,65 @@ const draggableSourceSpec: DragSourceSpec<DraggableChordProps, ChordDndValue> = 
     }
 };
 
-const dragSourceCollector: DragSourceCollector<DragProps> = (
-    connect: DragSourceConnector,
-    monitor: DragSourceMonitor
-) => {
+const dragSourceCollector: DragSourceCollector<DragProps> = (connect: DragSourceConnector, monitor: DragSourceMonitor) => {
     return {
         connectDragSource: connect.dragSource(),
         isDragging: monitor.isDragging()
     };
 };
 
-const styles = require("./DraggableChord.scss");
+const Chord = styled.div<{ inline?: boolean; selected?: boolean }>`
+    padding: 4px 5px;
+    background: ${p => p.theme.colors.baseHighlight};
+    font-size: ${p => p.theme.font.fontSizeSmall};
+    font-weight: bold;
+    color: ${p => p.theme.colors.baseInverted};
+    border-radius: 3px;
+    display: inline-flex;
+    margin: 5px 3px;
+    user-select: none;
+    outline: none;
+    z-index: 10;
+    position: relative;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &:last-of-type {
+        margin-right: 0;
+    }
+
+    &:hover {
+        background: ${p => p.theme.colors.baseHighlight};
+        cursor: pointer;
+    }
+
+    ${p =>
+        p.inline &&
+        css`
+            padding: 0px 1px;
+            line-height: normal;
+            margin: 0;
+            border: 1px solid lighten($border-color, $lighten-amount);
+            font-size: ${p.theme.font.fontSizeBody};
+            background: ${p.theme.colors.base};
+        `}
+
+    ${p =>
+        p.selected &&
+        css`
+            border: 1px solid ${p.theme.colors.attention};
+            background: ${p.theme.colors.baseHighlight};
+            margin: -1px -1px;
+        `}
+`;
+
+const InlineInput = styled.input`
+    all: unset;
+    size: unset;
+    text-align: center;
+`;
 
 @observer
 class DraggableChordClass extends React.Component<Props> {
@@ -87,25 +128,16 @@ class DraggableChordClass extends React.Component<Props> {
     private inputField = React.createRef<HTMLInputElement>();
 
     render() {
-        const { chord, baseKey, connectDragSource, isInline, onClick, isEditable } = this.props;
+        const { chord, baseKey, isInline, onClick, isEditable, isSelected } = this.props;
 
-        const className = classNames(styles.chord, { [styles.isInline]: isInline });
-
-        return connectDragSource(
-            <div
-                className={className}
-                onClick={onClick}
-                tabIndex={0}
-                onKeyDown={this.onKeyDown}
-                onDoubleClick={this.setIsEditing(true)}
-            >
+        return (
+            <Chord ref={this.connectRef} inline={isInline} selected={isSelected} onClick={onClick} tabIndex={0} onKeyDown={this.onKeyDown} onDoubleClick={this.setIsEditing(true)}>
                 {isEditable && this.isEditing ? (
-                    <input
+                    <InlineInput
                         value={this.inputValue}
                         onChange={this.onChange}
                         type="text"
                         size={this.inputValue.length ? this.inputValue.length : 1}
-                        className={styles.chordInput}
                         onFocus={this.onFocus}
                         onBlur={this.finishEditing}
                         ref={this.inputField}
@@ -113,9 +145,13 @@ class DraggableChordClass extends React.Component<Props> {
                 ) : (
                     chord.toAlphabethString(baseKey)
                 )}
-            </div>
+            </Chord>
         );
     }
+
+    private connectRef = (instance: HTMLDivElement) => {
+        this.props.connectDragSource(instance);
+    };
 
     @action
     private onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -147,9 +183,13 @@ class DraggableChordClass extends React.Component<Props> {
     };
 
     private onMove = (direction: MoveDirection) => {
+        if (this.isEditing) {
+            return;
+        }
+
         const { onMove, chord } = this.props;
 
-        if (chord instanceof Chord && onMove) {
+        if (chord instanceof ChordModel && onMove) {
             onMove(chord, direction);
         }
     };
@@ -185,6 +225,4 @@ class DraggableChordClass extends React.Component<Props> {
     }
 }
 
-export const DraggableChord = DragSource<Props, DragProps, {}>("chord", draggableSourceSpec, dragSourceCollector)(
-    DraggableChordClass
-);
+export const DraggableChord = DragSource<Props, DragProps, {}>("chord", draggableSourceSpec, dragSourceCollector)(DraggableChordClass);
