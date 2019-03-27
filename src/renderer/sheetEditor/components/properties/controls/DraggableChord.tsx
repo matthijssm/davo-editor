@@ -127,6 +127,11 @@ class DraggableChordClass extends React.Component<Props> {
 
     private inputField = React.createRef<HTMLInputElement>();
 
+    constructor(props: Props) {
+        super(props);
+        this.inputValue = props.chord.toAlphabethString(this.props.baseKey);
+    }
+
     render() {
         const { chord, baseKey, isInline, onClick, isEditable, isSelected } = this.props;
 
@@ -214,13 +219,15 @@ class DraggableChordClass extends React.Component<Props> {
         }
     };
 
-    componentWillMount() {
-        this.inputValue = this.props.chord.toAlphabethString(this.props.baseKey);
+    getSnapshotBeforeUpdate(prevProps: Props) {
+        return prevProps;
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps: Props) {
         if (this.isEditing) {
             this.inputField.current.focus();
+        } else {
+            this.inputValue = this.props.chord.toAlphabethString(this.props.baseKey);
         }
     }
 }
