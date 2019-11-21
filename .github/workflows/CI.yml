@@ -7,13 +7,13 @@ jobs:
         name: Build client
 
         runs-on: ubuntu-latest
+        env:
+            FONT_AWESOME_NPM_TOKEN: ${{ secrets.FONT_AWESOME_NPM_TOKEN }}
 
         steps:
             - uses: actions/checkout@v1
             - name: Install dependencies
               run: yarn
-              env:
-                  FONT_AWESOME_NPM_TOKEN: ${{ secrets.FONT_AWESOME_NPM_TOKEN }}
             - name: Run linter
               run: yarn lint
             - name: Build Typescript
