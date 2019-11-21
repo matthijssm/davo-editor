@@ -1,15 +1,15 @@
-import { SheetParser } from "../SheetParser";
 import { KeyUtils } from "../../utils/KeyUtils";
+import { SheetParser } from "../SheetParser";
 
 describe("sheetEditor.parsers.sheet.SheetParser", () => {
     it("should parse sheet parts correctly", () => {
         const sheetParts = `[Verse 1]
 Em7                  D                       C
-   Before I spoke a word, You were singing over me  
+   Before I spoke a word, You were singing over me
 Em7               D              C
-   You have been so, so good to me  
+   You have been so, so good to me
 Em7                 D                          C
-   Before I took a breath, You breathed Your life in me  
+   Before I took a breath, You breathed Your life in me
 Em7               D              C
    You have been so, so kind to me  `;
 
@@ -61,62 +61,62 @@ You have been so, so kind to me  `;
 
 const completeSheet = `[Verse 1]
 Em7                  D                       C
-   Before I spoke a word, You were singing over me  
+   Before I spoke a word, You were singing over me
 Em7               D              C
-   You have been so, so good to me  
+   You have been so, so good to me
 Em7                 D                          C
-   Before I took a breath, You breathed Your life in me  
+   Before I took a breath, You breathed Your life in me
 Em7               D              C
-   You have been so, so kind to me  
+   You have been so, so kind to me
 
 [Chorus]
        Em7            D             C                G
 Oh the overwhelming, never ending, reckless love of God
        Em7              D                       C                 G
-Oh, it chases me down, fights 'till I'm found, leaves the ninety nine  
+Oh, it chases me down, fights 'till I'm found, leaves the ninety nine
            Em7               D                      C             G
-I couldn't earn it  I don't deserve it  Still, You give yourself away  
+I couldn't earn it  I don't deserve it  Still, You give yourself away
        Em7            D             C                G
 Oh the overwhelming, never ending, reckless love of God
 
 [Verse 2]
 Em7                  D                    C
-   When I was Your foe, still Your love fought for me  
+   When I was Your foe, still Your love fought for me
 Em7               D              C
-   You have been so, so good to me  
+   You have been so, so good to me
 Em7                 D                  C
-   When I felt no worth, You paid it all for me  
+   When I felt no worth, You paid it all for me
 Em7               D              C
-   You have been so, so kind to me 
-
-[Chorus] 
-       Em7            D             C                G
-Oh the overwhelming, never ending, reckless love of God
-       Em7              D                       C                 G
-Oh, it chases me down, fights 'till I'm found, leaves the ninety nine  
-           Em7               D                      C             G
-I couldn't earn it  I don't deserve it  Still, You give yourself away  
-       Em7            D             C                G
-Oh the overwhelming, never ending, reckless love of God
-
-[Bridge] play softly 2x
-Em7                          D                            C                      G
-There's no shadow You won't light up, mountain You won't climb up, coming after me  
-Em7                        D                            C                      G                 
-There's no wall You won't kick down, no lie You won't tear down, coming after me  
-
-(Play more loudly) 2x
-Em7                           D                            C                     G
-There's no shadow You won't light up, mountain You won't climb up, coming after me  
-Em7                         D                           C                      G
-There's no wall You won't kick down, no lie You won't tear down, coming after me  
+   You have been so, so kind to me
 
 [Chorus]
        Em7            D             C                G
 Oh the overwhelming, never ending, reckless love of God
        Em7              D                       C                 G
-Oh, it chases me down, fights 'till I'm found, leaves the ninety nine  
+Oh, it chases me down, fights 'till I'm found, leaves the ninety nine
            Em7               D                      C             G
-I couldn't earn it  I don't deserve it  Still, You give yourself away  
+I couldn't earn it  I don't deserve it  Still, You give yourself away
+       Em7            D             C                G
+Oh the overwhelming, never ending, reckless love of God
+
+[Bridge] play softly 2x
+Em7                          D                            C                      G
+There's no shadow You won't light up, mountain You won't climb up, coming after me
+Em7                        D                            C                      G
+There's no wall You won't kick down, no lie You won't tear down, coming after me
+
+(Play more loudly) 2x
+Em7                           D                            C                     G
+There's no shadow You won't light up, mountain You won't climb up, coming after me
+Em7                         D                           C                      G
+There's no wall You won't kick down, no lie You won't tear down, coming after me
+
+[Chorus]
+       Em7            D             C                G
+Oh the overwhelming, never ending, reckless love of God
+       Em7              D                       C                 G
+Oh, it chases me down, fights 'till I'm found, leaves the ninety nine
+           Em7               D                      C             G
+I couldn't earn it  I don't deserve it  Still, You give yourself away
        Em7            D             C                G
 Oh the overwhelming, never ending, reckless love of God`;

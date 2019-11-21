@@ -1,12 +1,12 @@
-import { faFolder } from "@fortawesome/pro-light-svg-icons";
-import { remote } from "electron";
-import fs from "fs";
-import { observable, action, computed } from "mobx";
+import { action, computed, observable } from "mobx";
 
 import { ISheetService } from "./ISheetService";
-import { Sheet } from "../../model/Sheet";
-import { orderBy } from "lodash";
 import { JsonParser } from "../../model/parsers/JsonParser";
+import { Sheet } from "../../model/Sheet";
+import { faFolder } from "@fortawesome/pro-light-svg-icons";
+import fs from "fs";
+import { orderBy } from "lodash";
+import { remote } from "electron";
 
 const dataPath = remote.app.getPath("userData") + "/davo-files";
 
@@ -91,7 +91,7 @@ export class LocalSheetService implements ISheetService {
 
     async saveSheet(sheet: Sheet): Promise<Sheet> {
         return new Promise<Sheet>(resolve => {
-            const filePath = dataPath + "/" + sheet.ID + ".davo";
+            const filePath = `dataPath/${sheet.ID}.davo`;
 
             fs.writeFile(filePath, sheet.toJson(), error => {
                 if (error) {
