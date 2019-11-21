@@ -5,9 +5,9 @@ import { EditorState } from "shell";
 import { Bar, Group, BarTab, styled } from "essentials";
 
 import { FileGroup } from "./FileGroup";
-import { FileExplorerViewModel } from "../../../viewModels/FileExplorerViewModel";
 import { ISheetService } from "../../../services/sheets/ISheetService";
 import { Sheet } from "../../../model/Sheet";
+import { FileExplorerViewModel } from "../../viewModels/FileExplorerViewModel";
 
 type FileExplorerProps = {
     viewModel: FileExplorerViewModel;
@@ -28,6 +28,7 @@ const FileExplorerElement = styled.div`
 const FileServices = styled.div`
     flex: 1;
     overflow-y: scroll;
+    border-right: 1px solid ${p => p.theme.colors.tertiaryHighlight};
 `;
 
 @observer

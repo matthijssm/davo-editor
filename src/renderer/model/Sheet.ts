@@ -49,6 +49,15 @@ export class Sheet implements IDocument {
         };
     }
 
+    addSections(sections: ISection[], after?: ISection) {
+        if (after) {
+            const index = this.sections.findIndex(section => section.id === after.id);
+            this.sections.splice(index, 0, ...sections);
+        } else {
+            this.sections.push(...sections);
+        }
+    }
+
     toJson(): string {
         return JSON.stringify(this.generateJsonObject());
     }

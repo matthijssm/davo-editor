@@ -20,7 +20,10 @@ export namespace SheetParser {
     }
 
     export function parsePartial(text: string, key: Key): ISection[] {
-        const sections = text.split(/[\r\n]{2,}/gm);
+        console.log(text);
+        const sections = text.split(/$[\r\n|\n|\r]{2}^/gm);
+
+        console.log(sections);
 
         return sections.map(section => parseSection(section, key));
     }
@@ -28,7 +31,7 @@ export namespace SheetParser {
     function parseSection(text: string, key: Key): ISection {
         const section = new Section(null, false);
 
-        const lines = text.split(/[\r\n]{1}/g);
+        const lines = text.split(/[\r\n|\n|\r]{1}/g);
 
         const lineCollection: ILine[] = [];
 
@@ -43,14 +46,14 @@ export namespace SheetParser {
         return lines[index + 1] !== undefined ? lines[index + 1] : null;
     }
 
-    function parseLine(text: string, nextText: string, lineCollection: ILine[], key: Key): ILine {
+    function parseLine(text: string, nextText: string | null, lineCollection: ILine[], key: Key): ILine {
         const line = new Line();
 
         if (text.match(CHORD_LINE_REGEX)) {
             const chordLine = text;
             line.chords = getChordsOnLine(chordLine, key);
 
-            if (!nextText.match(CHORD_LINE_REGEX)) {
+            if (nextText !== null && !nextText.match(CHORD_LINE_REGEX)) {
                 line.content = nextText;
             }
 

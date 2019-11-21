@@ -5,7 +5,7 @@ import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import classNames from "classnames";
 import Modal from "react-modal";
 
-import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
 import { ISection } from "../../../model/ISection";
 import { Section } from "./Section";
 import { IElement } from "../../../model/IElement";

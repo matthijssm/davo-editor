@@ -1,6 +1,6 @@
 import * as React from "react";
 import { EditorState } from "shell";
-import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../sheetEditor/viewModels/SheetEditorViewModel";
 import { SheetEditor } from "../../sheetEditor/components/SheetEditor";
 import { observer } from "mobx-react";
 import { styled } from "essentials";

@@ -6,7 +6,7 @@ import { IChord } from "../../../model/IChord";
 import { Key } from "../../../model/Key";
 import { ChordDropzone } from "./ChordDropzone";
 import { IChordBase } from "../../../model/IChordBase";
-import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
 import { DraggableChord } from "../properties/controls/DraggableChord";
 import { MoveDirection } from "../../chords/ChordMover";
 import { EditorState } from "shell";

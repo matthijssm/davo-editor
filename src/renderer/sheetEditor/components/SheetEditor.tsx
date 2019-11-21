@@ -4,7 +4,7 @@ import { action } from "mobx";
 import { Bar, EditableBarTab, Group, styled } from "essentials";
 
 import { PropertiesPane } from "./properties/PropertiesPane";
-import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../viewModels/SheetEditorViewModel";
 import { Sheet } from "./sheet/Sheet";
 
 type SheetEditorProps = {

@@ -6,6 +6,7 @@ import { IElement } from "./IElement";
 import { IChord } from "./IChord";
 import { IChordBase } from "./IChordBase";
 import { Chord } from "./Chord";
+import { ISection } from "./ISection";
 
 export class Line implements ILine {
     id: string;

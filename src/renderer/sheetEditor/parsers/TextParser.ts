@@ -13,9 +13,11 @@ const CHORD_LINE_REGEX = /^\s*((([A-G])(#|b)?([^/\s]*)(\/([A-G])(#|b)?)?)(\s|$)+
 export namespace TextParser {
     export function parsePartial(text: string, key: Key): ISection[] {
         if (text.match(CHORD_LINE_REGEX)) {
+            console.info("[PARSER] Using sheet parser");
             return SheetParser.parsePartial(text, key);
         }
 
+        console.info("[PARSER] Using ChordPro parser");
         return ChordProParser.parsePartial(text, key);
     }
 

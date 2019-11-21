@@ -4,7 +4,7 @@ import { observer } from "mobx-react";
 import { Bar, BarTab, styled } from "essentials";
 
 import { MetaPane } from "./MetaPane";
-import { SheetEditorViewModel, PropertiesPaneTabs } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel, PropertiesPaneTabs } from "../../viewModels/SheetEditorViewModel";
 import { SheetPane } from "./SheetPane";
 
 type PropertiesPaneProps = {

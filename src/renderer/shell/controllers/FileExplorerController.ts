@@ -1,5 +1,5 @@
 import { ISheetService } from "../../services/sheets/ISheetService";
-import { FileExplorerViewModel } from "../../viewModels/FileExplorerViewModel";
+import { FileExplorerViewModel } from "../../shell/viewModels/FileExplorerViewModel";
 import { LocalSheetService } from "../../services/sheets/LocalSheetService";
 
 export class FileExplorerController {

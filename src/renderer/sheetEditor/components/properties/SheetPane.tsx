@@ -1,7 +1,7 @@
 import * as React from "react";
 import { inject } from "mobx-react";
 
-import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
 import { FormField } from "./controls/FormField";
 import { ChordMapCreator } from "../../chords/ChordMapCreator";
 import { DraggableChord } from "./controls/DraggableChord";
@@ -23,15 +23,7 @@ export class SheetPane extends React.Component<SheetPaneProps> {
         const chords = ChordMapCreator.createMap(this.props.viewModel.key);
 
         return chords.map((chord, index) => {
-            return (
-                <DraggableChord
-                    key={index}
-                    baseKey={this.props.viewModel.key}
-                    chord={chord}
-                    onDragStart={this.onDragStart}
-                    onDragEnd={this.onDragEnd}
-                />
-            );
+            return <DraggableChord key={index} baseKey={this.props.viewModel.key} chord={chord} onDragStart={this.onDragStart} onDragEnd={this.onDragEnd} />;
         });
     }
 

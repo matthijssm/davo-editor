@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { faThList, faCogs } from "@fortawesome/pro-light-svg-icons";
 
 import { TopBarTab } from "./TopBarTab";
-import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../../sheetEditor/viewModels/SheetEditorViewModel";
 import { ITabbedEditor } from "../../../controls/ITabbedEditor";
 import styled from "styled-components";
 
@@ -59,9 +59,7 @@ export class TopBar extends React.Component<TopBarProps> {
                 <TopBarTab active={true} icon={faThList} />
                 {/* <TopBarTab active={false} icon={faCogs} /> */}
 
-                <ScrollableTabsContainer ref={this.horizontalScrollElement}>
-                    {this.renderOpenTabs()}
-                </ScrollableTabsContainer>
+                <ScrollableTabsContainer ref={this.horizontalScrollElement}>{this.renderOpenTabs()}</ScrollableTabsContainer>
             </StyledTopBar>
         );
     }
@@ -121,10 +119,7 @@ export class TopBar extends React.Component<TopBarProps> {
         const container = this.horizontalScrollElement.current;
         const { scrollWidth, offsetLeft } = tabElement;
 
-        return (
-            offsetLeft >= container.scrollLeft &&
-            offsetLeft + scrollWidth <= container.clientWidth + container.scrollLeft
-        );
+        return offsetLeft >= container.scrollLeft && offsetLeft + scrollWidth <= container.clientWidth + container.scrollLeft;
     }
 
     private onClose = (editor: ITabbedEditor) => {

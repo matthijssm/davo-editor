@@ -5,7 +5,7 @@ import { FileExplorerController } from "./controllers/FileExplorerController";
 import { IDocument } from "../model/IDocument";
 import { ITabbedEditor } from "../controls/ITabbedEditor";
 import { Sheet } from "../model/Sheet";
-import { SheetEditorViewModel } from "../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../sheetEditor/viewModels/SheetEditorViewModel";
 import { IpcController } from "./controllers/IpcController";
 
 export class EditorState {

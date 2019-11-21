@@ -10,7 +10,7 @@ import { SectionOptionButton } from "./SectionOptionButton";
 import { Line } from "./Line";
 import { ILine } from "../../../model/ILine";
 import { IElement } from "../../../model/IElement";
-import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
 
 type SectionProps = {
     section: ISection;

@@ -5,7 +5,7 @@ import { styled } from "essentials";
 
 import { ILine } from "../../../model/ILine";
 import { IElement } from "../../../model/IElement";
-import { SheetEditorViewModel } from "../../../viewModels/SheetEditorViewModel";
+import { SheetEditorViewModel } from "../../viewModels/SheetEditorViewModel";
 import { IChordBase } from "../../../model/IChordBase";
 import { ChordLyricPair } from "./ChordLyricPair";
 import { IChord } from "../../../model/IChord";
@@ -128,10 +128,12 @@ export class Line extends React.Component<LineProps> {
     };
 
     private onPaste = (event: React.ClipboardEvent<HTMLInputElement>) => {
-        const pasteData = event.clipboardData.getData("text/plain");
+        const pasteData = event.clipboardData.getData("text");
 
-        if (pasteData.match(/\n/g)) {
+        if (pasteData && pasteData.match(/\n/g)) {
             event.preventDefault();
+
+            this.props.viewModel.onComplexPaste(pasteData);
         }
     };
 

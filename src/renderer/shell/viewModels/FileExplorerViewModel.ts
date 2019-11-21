@@ -1,6 +1,8 @@
-import { ISheetService } from "../services/sheets/ISheetService";
-import { computed, observable, action } from "mobx";
-import { Sheet } from "../model/Sheet";
+import { observable, action } from "mobx";
+
+import { ISheetService } from "../../services/sheets/ISheetService";
+import { Sheet } from "../../model/Sheet";
+
 export class FileExplorerViewModel {
     @observable
     openService: ISheetService | null = null;
@@ -40,8 +42,8 @@ export class FileExplorerViewModel {
     }
 
     importFile() {
-        if (!this.openService) {
-        }
+        // if (!this.openService) {
+        // }
         // Create a new sheet
         // Open the new sheet
         // Open the file import dialog
